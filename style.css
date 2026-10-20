@@ -70,7 +70,7 @@ section {
   margin: 10px auto;
 }
 
-/* Kula z wbudowaną, gwarantowaną teksturą kontynentów SVG i animacją */
+/* Kula z bogatszą teksturą kontynentów SVG i animacją */
 .globe {
   width: 100%;
   height: 100%;
@@ -80,12 +80,12 @@ section {
   box-shadow: 0 0 35px var(--accent-glow), inset -25px -25px 40px rgba(0, 0, 0, 0.9);
   
   background-color: #120924;
-  /* Wbudowana grafika wektorowa Ziemi – zadziała na 100% w każdej przeglądarce */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cpath fill='%233b1875' d='M150,80 Q200,60 250,90 Q300,120 280,170 Q260,220 200,200 Q140,180 130,130 Z M450,100 Q520,70 580,110 Q640,150 610,210 Q580,270 500,250 Q420,230 430,160 Z M100,260 Q180,240 220,280 Q260,320 200,360 Q140,400 90,340 Z'/%3E%3C/svg%3E");
-  background-size: 440px 220px;
+  /* Zaktualizowana, szczegółowa grafika wektorowa Ziemi z wyraźnymi masami lądowymi */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath fill='%234c1d95' stroke='%23a855f7' stroke-width='1.5' d='M150,100 Q220,70 280,110 Q340,150 310,210 Q280,270 200,250 Q120,230 110,160 Z M420,90 Q500,60 580,100 Q660,140 620,220 Q580,300 480,270 Q380,240 400,160 Z M120,280 Q200,260 250,300 Q300,340 220,390 Q140,440 90,360 Z M650,120 Q720,90 780,130 Q840,170 800,250 Q760,330 680,300 Q600,270 630,190 Z'/%3E%3C/svg%3E");
+  background-size: 500px 250px;
   background-repeat: repeat-x;
   background-position: center;
-  animation: rotateGlobe 18s linear infinite;
+  animation: rotateGlobe 20s linear infinite;
 }
 
 /* Siatka współrzędnych nakładana na globus */
@@ -103,7 +103,7 @@ section {
 
 @keyframes rotateGlobe {
   0% { background-position: 0% center; }
-  100% { background-position: -440px center; }
+  100% { background-position: -500px center; }
 }
 
 /* Miasta koncertowe pod globusem */
