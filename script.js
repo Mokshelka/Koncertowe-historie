@@ -1,13 +1,12 @@
-// === 1. WSTAWIANIE PINEZEK NA FIOLETOWY GLOBUS ===
+// === 1. ROZMIESZCZENIE MIAST NA KULI ===
 const mapContainer = document.getElementById('map');
 
-// Definicja miast i ich pozycji procentowych na okrągłym globusie
 const locations = [
-  { city: "Kopenhaga", top: "28%", left: "45%" },
-  { city: "Warszawa", top: "42%", left: "68%" },
-  { city: "Wrocław", top: "54%", left: "38%" },
-  { city: "Lublin", top: "58%", left: "75%" },
-  { city: "Kraków", top: "70%", left: "55%" }
+  { city: "Kopenhaga", top: "30%", left: "40%" },
+  { city: "Warszawa", top: "45%", left: "65%" },
+  { city: "Wrocław", top: "58%", left: "35%" },
+  { city: "Lublin", top: "62%", left: "72%" },
+  { city: "Kraków", top: "75%", left: "50%" }
 ];
 
 locations.forEach(loc => {
@@ -19,12 +18,10 @@ locations.forEach(loc => {
     <div class="pin-dot"></div>
     <div class="pin-label">${loc.city}</div>
   `;
-  pin.title = `Koncert w: ${loc.city}`;
   mapContainer.appendChild(pin);
 });
 
-
-// === 2. LISTA ARTYSTÓW (ROZWIJANE MENU) ===
+// === 2. LISTA ARTYSTÓW ===
 const artistsData = [
   { name: "🎤 Palaye Royale", shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }] },
   { name: "🎤 All for Metal", shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }] },
