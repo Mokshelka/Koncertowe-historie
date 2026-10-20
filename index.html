@@ -4,18 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Koncertownik 🎵</title>
-  
-  <!-- Style CSS -->
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Mapa Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
   <div class="container">
     
-    <!-- Nagłówek -->
     <header class="hero">
       <h1>🎵 KONCERTOWNIK</h1>
       <p class="description">
@@ -23,16 +17,23 @@
       </p>
     </header>
 
-    <!-- Mapa w fioletowym klimacie -->
+    <!-- Obracający się globus 3D -->
     <section class="map-section">
-      <div id="map"></div>
+      <div class="globe-container">
+        <div class="globe"></div>
+      </div>
+      <div class="cities-list">
+        <span class="city-badge">📍 Wrocław</span>
+        <span class="city-badge">📍 Kraków</span>
+        <span class="city-badge">📍 Warszawa</span>
+        <span class="city-badge">📍 Lublin</span>
+        <span class="city-badge">📍 Kopenhaga</span>
+      </div>
     </section>
 
     <!-- Rozwijane menu z artystami -->
     <section class="menu-section">
-      <div class="menu-accordion" id="artistList">
-        <!-- Generowane dynamicznie przez script.js -->
-      </div>
+      <div class="menu-accordion" id="artistList"></div>
     </section>
 
     <!-- Formularz gości -->
@@ -51,8 +52,6 @@
 
   </div>
 
-  <!-- Skrypty -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
