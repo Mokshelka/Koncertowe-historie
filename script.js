@@ -1,33 +1,26 @@
-// === 1. MAPA JAKO OKRĄGŁY GLOBUS (LEAFLET) ===
-const map = L.map('map', {
-  zoomControl: false,
-  dragging: true,
-  scrollWheelZoom: false,
-  doubleClickZoom: false
-}).setView([53.0, 16.0], 4);
+// === 1. ROZMIESZCZENIE MIAST NA FIOLETOWYM GLOBUSIE ===
+const mapContainer = document.getElementById('map');
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 18
-}).addTo(map);
-
-// Poprawne współrzędne miast
+// Dokładne pozycje procentowe dla miast na mapie Europy w tym widoku
 const locations = [
-  { city: "Wrocław", coords: [51.1079, 17.0385] },
-  { city: "Kraków", coords: [50.0647, 19.9450] },
-  { city: "Warszawa", coords: [52.2297, 21.0122] },
-  { city: "Lublin", coords: [51.2465, 22.5684] },
-  { city: "Kopenhaga", coords: [55.6761, 12.5683] }
+  { city: "Kopenhaga", top: "32%", left: "42%" },
+  { city: "Warszawa", top: "48%", left: "62%" },
+  { city: "Wrocław", top: "55%", left: "46%" },
+  { city: "Lublin", top: "60%", left: "68%" },
+  { city: "Kraków", top: "65%", left: "54%" }
 ];
 
 locations.forEach(loc => {
-  L.marker(loc.coords).addTo(map)
-    .bindPopup(`<b>🎵 ${loc.city}</b>`);
+  const pin = document.createElement('div');
+  pin.className = 'globe-pin';
+  pin.style.top = loc.top;
+  pin.style.left = loc.left;
+  pin.innerHTML = `
+    <div class="pin-dot"></div>
+    <div class="pin-label">${loc.city}</div>
+  `;
+  mapContainer.appendChild(pin);
 });
-
-// Wymuszenie poprawnego rozmiaru okręgu
-setTimeout(() => {
-  map.invalidateSize();
-}, 250);
 
 
 // === 2. LISTA ARTYSTÓW ===
