@@ -1,13 +1,18 @@
-// === 1. KONFIGURACJA MAPY Z MIASTAMI ===
-const map = L.map('map').setView([53.0, 14.0], 5); // Widok na Polskę i Danię
+// === 1. MAPA Z PRAWIDŁOWYMI WSPÓŁRZĘDNYMI ===
+const map = L.map('map', {
+  zoomControl: false,
+  dragging: true,
+  scrollWheelZoom: false
+}).setView([52.0, 16.0], 5); // Centrowanie na Polskę i Danię
 
+// Dodanie ciemnych kafli mapy
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
+  maxZoom: 18
 }).addTo(map);
 
-// Punkty na mapie (Wrocław, Kraków, Warszawa, Lublin, Kopenhaga)
+// Poprawne współrzędne miast (Wrocław, Kraków, Warszawa, Lublin, Kopenhaga)
 const locations = [
-  { city: "Wrocław", coords: [51.1100, 17.0325] },
+  { city: "Wrocław", coords: [51.1079, 17.0385] },
   { city: "Kraków", coords: [50.0647, 19.9450] },
   { city: "Warszawa", coords: [52.2297, 21.0122] },
   { city: "Lublin", coords: [51.2465, 22.5684] },
@@ -16,28 +21,27 @@ const locations = [
 
 locations.forEach(loc => {
   L.marker(loc.coords).addTo(map)
-    .bindPopup(`<b>${loc.city}</b><br>Byłam tu na koncercie! 🎵`);
+    .bindPopup(`<b>🎵 ${loc.city}</b>`);
 });
 
-// === 2. DANE ARTYSTÓW I ROZWIJANE MENU ===
-// Przykład struktury danych (możesz łatwo dopisywać kolejnych):
+
+// === 2. MENU ARTYSTÓW (ROZWIJANE DATY) ===
 const artistsData = [
   {
-    name: "Dawid Podsiadło",
+    name: "🎤 Dawid Podsiadło",
     shows: [
-      { id: "podsiadlo-1", date: "15.06.2024", venue: "PGE Narodowy, Warszawa" },
-      { id: "podsiadlo-2", date: "Data nieznana (2022)", venue: "Hala Stulecia, Wrocław" }
+      { date: "15.06.2024", venue: "PGE Narodowy, Warszawa" },
+      { date: "Data nieznana (2022)", venue: "Hala Stulecia, Wrocław" }
     ]
   },
   {
-    name: "Coldplay",
+    name: "🎤 Coldplay",
     shows: [
-      { id: "coldplay-1", date: "08.07.2023", venue: "Kopenhaga" }
+      { date: "08.07.2023", venue: "Parken, Kopenhaga" }
     ]
   }
 ];
 
-// Generowanie rozwijanego menu w HTML
 const artistListContainer = document.getElementById('artistList');
 
 artistsData.forEach(artist => {
@@ -45,12 +49,12 @@ artistsData.forEach(artist => {
   item.className = 'artist-item';
   
   let showsList = artist.shows.map(show => 
-    `<li><a href="#${show.id}">📅 ${show.date} — ${show.venue}</a></li>`
+    `<li>📅 <b>${show.date}</b> — ${show.venue}</li>`
   ).join('');
 
   item.innerHTML = `
     <button class="artist-btn" onclick="toggleArtist(this)">
-      ${artist.name} <span class="arrow">▼</span>
+      <span>${artist.name}</span> <span class="arrow">▼</span>
     </button>
     <ul class="shows-dropdown" style="display: none;">
       ${showsList}
@@ -60,7 +64,7 @@ artistsData.forEach(artist => {
   artistListContainer.appendChild(item);
 });
 
-// Funkcja rozwijania i zwijania listy dat
+// Funkcja rozwijania i zwijania listy
 function toggleArtist(button) {
   const dropdown = button.nextElementSibling;
   const isOpen = dropdown.style.display === "block";
@@ -68,9 +72,10 @@ function toggleArtist(button) {
   button.querySelector('.arrow').innerText = isOpen ? "▼" : "▲";
 }
 
-// === 3. OBSŁUGA FORMULARZA GOŚCI ===
+
+// === 3. OBSŁUGA FORMULARZA ===
 document.getElementById('guestbookForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  alert("Dziękuję za wpis! w kolejnym kroku podepniemy go do bazy.");
+  alert("Dziękuję za wpis! ✨");
   this.reset();
 });
