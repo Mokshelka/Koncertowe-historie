@@ -1,25 +1,34 @@
-// === 1. ROZMIESZCZENIE MIAST NA KULI ===
-const mapContainer = document.getElementById('map');
+// === 1. MAPA JAKO OKRĄGŁY GLOBUS (LEAFLET) ===
+const map = L.map('map', {
+  zoomControl: false,
+  dragging: true,
+  scrollWheelZoom: false,
+  doubleClickZoom: false
+}).setView([53.0, 16.0], 4);
 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18
+}).addTo(map);
+
+// Poprawne współrzędne miast
 const locations = [
-  { city: "Kopenhaga", top: "30%", left: "40%" },
-  { city: "Warszawa", top: "45%", left: "65%" },
-  { city: "Wrocław", top: "58%", left: "35%" },
-  { city: "Lublin", top: "62%", left: "72%" },
-  { city: "Kraków", top: "75%", left: "50%" }
+  { city: "Wrocław", coords: [51.1079, 17.0385] },
+  { city: "Kraków", coords: [50.0647, 19.9450] },
+  { city: "Warszawa", coords: [52.2297, 21.0122] },
+  { city: "Lublin", coords: [51.2465, 22.5684] },
+  { city: "Kopenhaga", coords: [55.6761, 12.5683] }
 ];
 
 locations.forEach(loc => {
-  const pin = document.createElement('div');
-  pin.className = 'globe-pin';
-  pin.style.top = loc.top;
-  pin.style.left = loc.left;
-  pin.innerHTML = `
-    <div class="pin-dot"></div>
-    <div class="pin-label">${loc.city}</div>
-  `;
-  mapContainer.appendChild(pin);
+  L.marker(loc.coords).addTo(map)
+    .bindPopup(`<b>🎵 ${loc.city}</b>`);
 });
+
+// Wymuszenie poprawnego rozmiaru okręgu
+setTimeout(() => {
+  map.invalidateSize();
+}, 250);
+
 
 // === 2. LISTA ARTYSTÓW ===
 const artistsData = [
