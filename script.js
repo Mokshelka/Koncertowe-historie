@@ -25,20 +25,75 @@ locations.forEach(loc => {
 });
 
 
-// === 2. MENU ARTYSTÓW (ROZWIJANE DATY) ===
+// === 2. PEŁNA LISTA ARTYSTÓW I ZESPOŁÓW ===
 const artistsData = [
   {
-    name: "🎤 Dawid Podsiadło",
-    shows: [
-      { date: "15.06.2024", venue: "PGE Narodowy, Warszawa" },
-      { date: "Data nieznana (2022)", venue: "Hala Stulecia, Wrocław" }
-    ]
+    name: "🎤 Palaye Royale",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
   },
   {
-    name: "🎤 Coldplay",
-    shows: [
-      { date: "08.07.2023", venue: "Parken, Kopenhaga" }
-    ]
+    name: "🎤 All for Metal",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Kim Dracula",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 DPR Ian, DPR Cream, DPR Arctic",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Dead Poet Society",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Des Rocs",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Grandson",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Lordi",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Kpop Nation",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Lordofon",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Nothing but Thieves",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 SBM Festiwal",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 The Rose",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Wind Rose",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Zdechły Osa",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Yann",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
+  },
+  {
+    name: "🎤 Tabber",
+    shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }]
   }
 ];
 
