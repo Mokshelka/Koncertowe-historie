@@ -44,7 +44,7 @@ body {
   line-height: 1.4;
 }
 
-/* Sekcje z efektem szkła (Glassmorphism) */
+/* Sekcje */
 section {
   background: var(--card-glass);
   backdrop-filter: blur(12px);
@@ -60,30 +60,69 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 25px 15px;
+  padding: 20px 15px;
   text-align: center;
 }
 
-/* Styl okrągłego globusa (powiększony, żeby pomieścić pinezki) */
+/* Stylizacja stylowego Globusa CSS z siatką */
 #map {
   width: 280px;
   height: 280px;
   border-radius: 50%;
   border: 3px solid var(--accent-purple);
-  box-shadow: 0 0 25px var(--accent-glow), inset 0 0 20px rgba(147, 51, 234, 0.5);
+  box-shadow: 0 0 25px var(--accent-glow), inset 0 0 30px rgba(147, 51, 234, 0.6);
   margin: 0 auto;
+  position: relative;
   overflow: hidden;
-  background: #0a0814;
+  background: radial-gradient(circle at 35% 35%, #2e1065, #0f071e 70%, #05020a);
 }
 
-/* Fioletowo-ciemny filtr mapy */
-.leaflet-layer, .leaflet-control-zoom, .leaflet-control-attribution {
-  filter: invert(100%) hue-rotate(200deg) brightness(35%) contrast(160%) !important;
+/* Siatka południków i równoleżników (efekt globusa) */
+#map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: 
+    radial-gradient(ellipse at center, transparent 30%, rgba(168, 85, 247, 0.2) 31%, transparent 32%),
+    linear-gradient(90deg, transparent 49%, rgba(168, 85, 247, 0.25) 50%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, rgba(168, 85, 247, 0.25) 50%, transparent 51%);
+  background-size: 100% 100%, 50px 100%, 100% 50px;
+  pointer-events: none;
 }
 
-/* Ukrycie napisu Leaflet */
-.leaflet-control-attribution {
-  display: none !important;
+/* Styl punktów na globusie */
+.globe-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+}
+.globe-pin:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 10;
+}
+.pin-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #e879f9;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #e879f9;
+}
+.pin-label {
+  font-size: 0.65rem;
+  background: rgba(15, 7, 30, 0.85);
+  color: var(--text-main);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  margin-top: 2px;
+  white-space: nowrap;
+  font-weight: 600;
 }
 
 /* Rozwijane Menu Artystów */
@@ -129,9 +168,6 @@ section {
   color: var(--text-muted);
   text-decoration: none;
 }
-.shows-dropdown a:hover {
-  color: #fff;
-}
 
 /* Formularz gości */
 .guestbook-section h2 {
@@ -150,10 +186,6 @@ section {
   font-size: 0.85rem;
   outline: none;
 }
-#guestbookForm input:focus, #guestbookForm textarea:focus {
-  border-color: var(--accent-purple);
-  box-shadow: 0 0 8px var(--accent-glow);
-}
 #guestbookForm button {
   background: linear-gradient(135deg, #7e22ce, #a855f7);
   color: #fff;
@@ -164,10 +196,6 @@ section {
   font-size: 0.85rem;
   font-weight: bold;
   float: right;
-  transition: opacity 0.2s;
-}
-#guestbookForm button:hover {
-  opacity: 0.9;
 }
 
 footer {
