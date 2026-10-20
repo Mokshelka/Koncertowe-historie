@@ -62,7 +62,7 @@ section {
   text-align: center;
 }
 
-/* Widoczna, siatkowana kula ziemska */
+/* Styl globusa z zarysami lądów i siatką */
 #map {
   width: 280px;
   height: 280px;
@@ -71,21 +71,26 @@ section {
   box-shadow: 0 0 30px var(--accent-glow);
   margin: 0 auto;
   position: relative;
-  overflow: visible; /* żeby napisy nie uciekały */
-  background: radial-gradient(circle at 35% 35%, #4c1d95, #1e1b4b 60%, #090514 100%);
+  overflow: visible;
+  background: radial-gradient(circle at 35% 35%, #581c87, #1e1b4b 65%, #090514 100%);
 }
 
-/* Wyraźna siatka globusa */
+/* Siatka i abstrakcyjne zrasy lądów wewnątrz kuli */
 #map::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: 
-    radial-gradient(circle at center, transparent 40%, rgba(216, 180, 254, 0.25) 41%, transparent 42%),
-    linear-gradient(90deg, transparent 49%, rgba(216, 180, 254, 0.3) 50%, transparent 51%),
-    linear-gradient(0deg, transparent 49%, rgba(216, 180, 254, 0.3) 50%, transparent 51%);
-  background-size: 100% 100%, 70px 100%, 100% 70px;
+    /* Stylizowane kontury lądów (Europa / Skandynawia / Polska) */
+    radial-gradient(ellipse 70px 50px at 45% 35%, rgba(216, 180, 254, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 90px 60px at 60% 55%, rgba(192, 132, 252, 0.18) 0%, transparent 80%),
+    radial-gradient(ellipse 50px 40px at 30% 60%, rgba(168, 85, 247, 0.15) 0%, transparent 70%),
+    /* Siatka globusa */
+    radial-gradient(circle at center, transparent 40%, rgba(216, 180, 254, 0.15) 41%, transparent 42%),
+    linear-gradient(90deg, transparent 49%, rgba(216, 180, 254, 0.2) 50%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, rgba(216, 180, 254, 0.2) 50%, transparent 51%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 70px 100%, 100% 70px;
   pointer-events: none;
 }
 
@@ -119,7 +124,7 @@ section {
   font-weight: bold;
 }
 
-/* Menu i reszta */
+/* Menu rozwijane */
 .menu-accordion { display: flex; flex-direction: column; gap: 8px; }
 .artist-item { border: 1px solid var(--border-color); border-radius: 10px; background: rgba(30, 20, 50, 0.6); overflow: hidden; }
 .artist-btn { width: 100%; padding: 12px 15px; background: transparent; border: none; color: var(--text-main); font-size: 0.95rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -127,6 +132,7 @@ section {
 .shows-dropdown { list-style: none; padding: 8px 15px 12px; background: rgba(10, 5, 20, 0.5); border-top: 1px solid var(--border-color); }
 .shows-dropdown li { padding: 6px 0; font-size: 0.85rem; color: var(--text-muted); }
 
+/* Formularz */
 .guestbook-section h2 { font-size: 1rem; margin-bottom: 10px; color: var(--text-main); }
 #guestbookForm input, #guestbookForm textarea { width: 100%; padding: 10px; margin-bottom: 8px; background: rgba(10, 5, 20, 0.8); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem; outline: none; }
 #guestbookForm button { background: linear-gradient(135deg, #7e22ce, #a855f7); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; float: right; }
