@@ -1,37 +1,30 @@
-// === 1. MAPA JAKO OKRĄGŁY GLOBUS ===
-const map = L.map('map', {
-  zoomControl: false,
-  dragging: true,
-  scrollWheelZoom: false,
-  doubleClickZoom: false
-}).setView([53.0, 16.0], 4); // Widok obejmujący Polskę i Danię
+// === 1. WSTAWIANIE PINEZEK NA FIOLETOWY GLOBUS ===
+const mapContainer = document.getElementById('map');
 
-// Dodanie kafli mapy
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 18
-}).addTo(map);
-
-// Współrzędne miast (Wrocław, Kraków, Warszawa, Lublin, Kopenhaga)
+// Definicja miast i ich pozycji procentowych na okrągłym globusie
 const locations = [
-  { city: "Wrocław", coords: [51.1079, 17.0385] },
-  { city: "Kraków", coords: [50.0647, 19.9450] },
-  { city: "Warszawa", coords: [52.2297, 21.0122] },
-  { city: "Lublin", coords: [51.2465, 22.5684] },
-  { city: "Kopenhaga", coords: [55.6761, 12.5683] }
+  { city: "Kopenhaga", top: "28%", left: "45%" },
+  { city: "Warszawa", top: "42%", left: "68%" },
+  { city: "Wrocław", top: "54%", left: "38%" },
+  { city: "Lublin", top: "58%", left: "75%" },
+  { city: "Kraków", top: "70%", left: "55%" }
 ];
 
 locations.forEach(loc => {
-  L.marker(loc.coords).addTo(map)
-    .bindPopup(`<b>🎵 ${loc.city}</b>`);
+  const pin = document.createElement('div');
+  pin.className = 'globe-pin';
+  pin.style.top = loc.top;
+  pin.style.left = loc.left;
+  pin.innerHTML = `
+    <div class="pin-dot"></div>
+    <div class="pin-label">${loc.city}</div>
+  `;
+  pin.title = `Koncert w: ${loc.city}`;
+  mapContainer.appendChild(pin);
 });
 
-// Wymuszenie odświeżenia rozmiaru mapy, żeby ładnie wypełniła okrąg
-setTimeout(() => {
-  map.invalidateSize();
-}, 200);
 
-
-// === 2. LISTA ARTYSTÓW (BEZ ZMIAN) ===
+// === 2. LISTA ARTYSTÓW (ROZWIJANE MENU) ===
 const artistsData = [
   { name: "🎤 Palaye Royale", shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }] },
   { name: "🎤 All for Metal", shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }] },
