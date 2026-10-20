@@ -5,59 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Koncertownik 🎵</title>
   
-  <!-- Styl powiązany z plikiem CSS -->
+  <!-- Style CSS -->
   <link rel="stylesheet" href="style.css">
   
-  <!-- Biblioteka do darmowej mapy z punktami -->
+  <!-- Mapa Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
   <div class="container">
     
-    <!-- 1. Opis czym jest Koncertownik -->
+    <!-- Nagłówek -->
     <header class="hero">
-      <h1>🎵 Koncertownik</h1>
+      <h1>🎵 KONCERTOWNIK</h1>
       <p class="description">
-        Witaj w moim cyfrowym pamiętniku muzycznym! To miejsce, w którym gromadzę wszystkie swoje 
-        wspomnienia z koncertów, setlisty, zdjęcia, nagrania oraz miejsca, które odwiedziłam 
-        dzięki muzyce na żywo.
+        Witaj w moim cyfrowym pamiętniku muzycznym! To miejsce na moje koncertowe wspomnienia, setlisty i zdjęcia.
       </p>
     </header>
 
-    <!-- 2. Mapa z zaznaczonymi miastami -->
+    <!-- Mapa w fioletowym klimacie -->
     <section class="map-section">
-      <h2>🌍 Moja mapa koncertowa</h2>
       <div id="map"></div>
     </section>
 
-    <!-- 3. Menu z podziałem na artystów i rozwijanymi datami -->
-    <section class="artists-section">
-      <h2>🎤 Wykonawcy i koncerty</h2>
-      <p class="subtitle">Kliknij wykonawcę, aby zobaczyć daty koncertów:</p>
-      
-      <div class="artist-list" id="artistList">
-        <!-- Zostanie dynamicznie wygenerowane z pliku script.js -->
+    <!-- Rozwijane menu z artystami -->
+    <section class="menu-section">
+      <div class="menu-accordion" id="artistList">
+        <!-- Generowane dynamicznie przez script.js -->
       </div>
     </section>
 
-    <!-- 4. Formularz dla odwiedzających (Księga Gości) -->
+    <!-- Formularz gości -->
     <section class="guestbook-section">
-      <h2>✍️ Byłeś tu? Daj znać!</h2>
+      <h2>✍️ Zostawcie wpis</h2>
       <form id="guestbookForm">
-        <input type="text" placeholder="Twoje imię / Nick z IG" required>
-        <textarea placeholder="Zostaw miłe słowo lub wspomnienie..." rows="3" required></textarea>
-        <button type="submit">Wyślij wpis ✨</button>
+        <input type="text" placeholder="Imię / Nick z IG" required>
+        <textarea placeholder="Komentarz" rows="2" required></textarea>
+        <button type="submit">Wyślij</button>
       </form>
     </section>
 
     <footer>
-      <p>Stworzone z pasji do muzyki | Koncertownik</p>
+      <p>Stworzone z pasji do muzyki ✨ | Koncertownik</p>
     </footer>
 
   </div>
 
-  <!-- Skrypty: Mapa Leaflet oraz nasz plik logiki -->
+  <!-- Skrypty -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
