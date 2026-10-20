@@ -62,7 +62,7 @@ section {
   text-align: center;
 }
 
-/* Kontener obracającego się globusa 3D */
+/* Kontener obracającego się globusa 3D z teksturą Ziemi */
 .globe-container {
   perspective: 1000px;
   width: 220px;
@@ -75,32 +75,25 @@ section {
   height: 100%;
   position: relative;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #a855f7, #581c87 60%, #090514 100%);
-  box-shadow: 0 0 35px var(--accent-glow), inset -20px -20px 40px rgba(0, 0, 0, 0.8);
-  border: 2px solid #e879f9;
-  /* Animacja obrotu 3D */
-  animation: rotateGlobe 15s linear infinite;
-}
-
-/* Efekt siatki na kuli */
-.globe::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: 
-    linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.15) 50%, transparent 51%),
-    linear-gradient(0deg, transparent 49%, rgba(255, 255, 255, 0.15) 50%, transparent 51%);
-  background-size: 50px 50px;
-  pointer-events: none;
+  border: 3px solid #c084fc;
+  box-shadow: 0 0 35px var(--accent-glow), inset -25px -25px 40px rgba(0, 0, 0, 0.9);
+  
+  /* Tekstura mapy świata w tle oraz stylizacja fioletowo-neonowa */
+  background-color: #090514;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/23/Blue_Marble_2002.png");
+  background-size: 450px 225px;
+  background-position: center;
+  
+  filter: hue-rotate(250deg) brightness(120%) contrast(150%);
+  animation: rotateGlobe 20s linear infinite;
 }
 
 @keyframes rotateGlobe {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% { background-position: 0% center; }
+  100% { background-position: -450px center; }
 }
 
-/* Statyczne pinezki z miastami wokół / na kuli */
+/* Statyczne pinezki z miastami pod globusem */
 .cities-list {
   display: flex;
   flex-wrap: wrap;
