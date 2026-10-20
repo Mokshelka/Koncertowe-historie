@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koncertownik 🎵</title>
+  
+  <!-- Styl powiązany z plikiem CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Biblioteka do darmowej mapy z punktami -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- 1. Opis czym jest Koncertownik -->
+    <header class="hero">
+      <h1>🎵 Koncertownik</h1>
+      <p class="description">
+        Witaj w moim cyfrowym pamiętniku muzycznym! To miejsce, w którym gromadzę wszystkie swoje 
+        wspomnienia z koncertów, setlisty, zdjęcia, nagrania oraz miejsca, które odwiedziłam 
+        dzięki muzyce na żywo.
+      </p>
+    </header>
+
+    <!-- 2. Mapa z zaznaczonymi miastami -->
+    <section class="map-section">
+      <h2>🌍 Moja mapa koncertowa</h2>
+      <div id="map"></div>
+    </section>
+
+    <!-- 3. Menu z podziałem na artystów i rozwijanymi datami -->
+    <section class="artists-section">
+      <h2>🎤 Wykonawcy i koncerty</h2>
+      <p class="subtitle">Kliknij wykonawcę, aby zobaczyć daty koncertów:</p>
+      
+      <div class="artist-list" id="artistList">
+        <!-- Zostanie dynamicznie wygenerowane z pliku script.js -->
+      </div>
+    </section>
+
+    <!-- 4. Formularz dla odwiedzających (Księga Gości) -->
+    <section class="guestbook-section">
+      <h2>✍️ Byłeś tu? Daj znać!</h2>
+      <form id="guestbookForm">
+        <input type="text" placeholder="Twoje imię / Nick z IG" required>
+        <textarea placeholder="Zostaw miłe słowo lub wspomnienie..." rows="3" required></textarea>
+        <button type="submit">Wyślij wpis ✨</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>Stworzone z pasji do muzyki | Koncertownik</p>
+    </footer>
+
+  </div>
+
+  <!-- Skrypty: Mapa Leaflet oraz nasz plik logiki -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
