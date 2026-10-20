@@ -1,29 +1,4 @@
-// === 1. ROZMIESZCZENIE MIAST NA FIOLETOWYM GLOBUSIE ===
-const mapContainer = document.getElementById('map');
-
-// Dokładne pozycje procentowe dla miast na mapie Europy w tym widoku
-const locations = [
-  { city: "Kopenhaga", top: "32%", left: "42%" },
-  { city: "Warszawa", top: "48%", left: "62%" },
-  { city: "Wrocław", top: "55%", left: "46%" },
-  { city: "Lublin", top: "60%", left: "68%" },
-  { city: "Kraków", top: "65%", left: "54%" }
-];
-
-locations.forEach(loc => {
-  const pin = document.createElement('div');
-  pin.className = 'globe-pin';
-  pin.style.top = loc.top;
-  pin.style.left = loc.left;
-  pin.innerHTML = `
-    <div class="pin-dot"></div>
-    <div class="pin-label">${loc.city}</div>
-  `;
-  mapContainer.appendChild(pin);
-});
-
-
-// === 2. LISTA ARTYSTÓW ===
+// === LISTA ARTYSTÓW I ZESPOŁÓW ===
 const artistsData = [
   { name: "🎤 Palaye Royale", shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }] },
   { name: "🎤 All for Metal", shows: [{ date: "Do uzupełnienia", venue: "Wybierz miasto" }] },
@@ -73,7 +48,7 @@ function toggleArtist(button) {
   button.querySelector('.arrow').innerText = isOpen ? "▼" : "▲";
 }
 
-// === 3. OBSŁUGA FORMULARZA ===
+// === OBSŁUGA FORMULARZA ===
 document.getElementById('guestbookForm').addEventListener('submit', function(e) {
   e.preventDefault();
   alert("Dziękuję za wpis! ✨");
