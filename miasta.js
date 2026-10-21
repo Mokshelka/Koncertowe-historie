@@ -4,7 +4,7 @@
 // Tworzy przycisk dla każdego miasta z dane.js.
 // Kliknięcie obraca globus do tego miasta.
 
-(function () {
+Koncertownik.miasta = { start() {
   const lista = document.getElementById('listaMiast');
   if (!lista) return;
 
@@ -22,4 +22,4 @@
 
     lista.appendChild(btn);
   });
-})();
+} };

@@ -3,9 +3,9 @@
 // =====================================================
 // Wymaga: d3 i topojson-client (ładowane w index.html).
 // Miasta bierze z dane.js, kolory z motywu (zmienne CSS).
-// Udostępnia: Koncertownik.globus.lecDo('Kraków')
+// Udostępnia: Koncertownik.globus.start() i .lecDo('Kraków')
 
-(function () {
+Koncertownik.globus = { start() {
   const canvas = document.getElementById('globe');
   if (!canvas || !window.d3 || !window.topojson) return;
 
@@ -213,7 +213,7 @@
       setTimeout(() => { if (hovered === c) { hovered = null; hideTooltip(); } }, 2500);
     }, 1250);
   }
-  Koncertownik.globus = { lecDo };
+  Koncertownik.globus.lecDo = lecDo;
 
   // --- Mapa świata (granice krajów) ---
   fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json')
@@ -227,4 +227,4 @@
   window.addEventListener('resize', resize);
   resize();
   requestAnimationFrame(frame);
-})();
+} };

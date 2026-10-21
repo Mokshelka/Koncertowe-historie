@@ -3,7 +3,7 @@
 // =====================================================
 // Po rozwinięciu widać koncerty artysty i link do jego podstrony.
 
-(function () {
+Koncertownik.lista = { start() {
   const kontener = document.getElementById('artistList');
   if (!kontener) return;
   const { esc, data, koncertyArtysty } = Koncertownik.narzedzia;
@@ -37,4 +37,4 @@
 
     kontener.appendChild(item);
   });
-})();
+} };

@@ -16,7 +16,8 @@ lista.css      rozwijana lista artystów
 ksiega.css     formularz księgi gości
 artysta.css    podstrona artysty
 
-dane.js        ⭐ CAŁA TREŚĆ STRONY – tu dopisujesz koncerty
+supabase.js    połączenie z bazą (adres + klucz publiczny)
+dane.js        pobiera treść strony z bazy
 narzedzia.js   małe funkcje pomocnicze (daty, YouTube…)
 motyw.js       zamienia motyw z dane.js na kolory i czcionki
 glowna.js      uruchamia stronę główną
@@ -27,30 +28,16 @@ ksiega.js      księga gości (na razie bez zapisu)
 artysta.js     podstrona artysty
 ```
 
-## Jak dodać koncert
+admin.html     panel admina (logowanie)
+admin.css      wygląd panelu
+admin.js       logowanie i zakładki
+admin-*.js     zakładki panelu: koncerty, artyści, miasta, wygląd, księga
+baza.sql       budowa bazy w Supabase (uruchamiana raz)
 
-Otwórz `dane.js` i dopisz w `koncerty`:
+## Jak dodać koncert, artystę, zmienić wygląd
 
-```js
-{
-  artysta: 'nothing-but-thieves',   // id z listy artystów
-  data: '2025-03-14',
-  miasto: 'Warszawa',               // musi być na liście miast
-  miejsce: 'COS Torwar',
-  setlista: ['Amsterdam', 'Sorry'],
-  filmy: ['https://youtu.be/XXXXXXXXXXX']
-},
-```
-
-Nowe miasto? Dopisz je w `miasta` (współrzędne znajdziesz w Google Maps:
-prawy klik na mapie → pierwsza liczba to szerokość, druga to długość;
-w pliku wpisujemy je odwrotnie: `[długość, szerokość]`).
-
-## Jak zmienić motyw artysty
-
-W `artysci` dodaj artyście `motyw` z wartościami, które mają się różnić
-od domyślnych (lista wszystkich jest w `ustawienia.motyw`). Czcionki to
-nazwy z [Google Fonts](https://fonts.google.com).
+Wejdź na `…/admin.html`, zaloguj się i korzystaj z zakładek.
+Bilety wgrane przy koncercie są prywatne – widzisz je tylko Ty.
 
 ## Publikacja na GitHub Pages
 
@@ -65,7 +52,7 @@ Na nie przygotujemy prywatny schowek w Supabase.
 ## Plan
 
 - [x] Podział kodu, jedno miejsce na dane, motywy artystów
-- [ ] Konto Supabase
-- [ ] Panel admina: koncerty, filmy, motywy, wygląd całej strony
-- [ ] Prywatne bilety
-- [ ] Zapisywanie księgi gości
+- [x] Konto Supabase
+- [x] Panel admina: koncerty, filmy, motywy, wygląd całej strony
+- [x] Prywatne bilety
+- [x] Zapisywanie księgi gości

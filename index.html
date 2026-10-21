@@ -14,7 +14,7 @@
 
     <!-- Nagłówek (treść z dane.js) -->
     <header class="hero">
-      <h1 id="tytulStrony"></h1>
+      <h1 id="tytulStrony">🎵</h1>
       <p class="description" id="opisStrony"></p>
     </header>
 
@@ -37,11 +37,13 @@
     <section class="guestbook-section">
       <h2>✍️ Zostawcie wpis</h2>
       <form id="guestbookForm">
-        <input type="text" placeholder="Imię / Nick z IG" required>
-        <textarea placeholder="Komentarz" rows="2" required></textarea>
+        <input type="text" name="imie" placeholder="Imię / Nick z IG" maxlength="60" required>
+        <textarea name="tresc" placeholder="Komentarz" rows="2" maxlength="500" required></textarea>
+        <input type="text" name="www" class="pulapka" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit">Wyślij</button>
         <p id="guestbookInfo" class="guestbook-info" aria-live="polite"></p>
       </form>
+      <div id="wpisyKsiegi" class="wpisy"></div>
     </section>
 
     <footer><p id="stopka"></p></footer>
@@ -51,14 +53,18 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 
-  <!-- Nasz kod (kolejność ma znaczenie: najpierw dane) -->
+  <!-- Baza danych -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+
+  <!-- Nasz kod (glowna.js na końcu – ona uruchamia resztę) -->
+  <script src="supabase.js"></script>
   <script src="dane.js"></script>
   <script src="narzedzia.js"></script>
   <script src="motyw.js"></script>
-  <script src="glowna.js"></script>
   <script src="globe.js"></script>
   <script src="miasta.js"></script>
   <script src="lista.js"></script>
   <script src="ksiega.js"></script>
+  <script src="glowna.js"></script>
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Panel – Koncertownik</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="container container-admin">
+
+    <header class="hero">
+      <h1>🔐 Panel</h1>
+      <a class="link-strona" href="index.html" target="_blank">Otwórz stronę ↗</a>
+    </header>
+
+    <!-- Logowanie -->
+    <section id="ekranLogowania" hidden>
+      <h2>Zaloguj się</h2>
+      <form id="formLogowania" class="formularz">
+        <label>E-mail <input type="email" name="email" autocomplete="username" required></label>
+        <label>Hasło <input type="password" name="haslo" autocomplete="current-password" required></label>
+        <button type="submit" class="btn">Zaloguj</button>
+      </form>
+    </section>
+
+    <!-- Panel po zalogowaniu -->
+    <div id="panel" hidden>
+      <nav class="zakladki">
+        <button type="button" data-zakladka="koncerty">🎤 Koncerty</button>
+        <button type="button" data-zakladka="artysci">⭐ Artyści</button>
+        <button type="button" data-zakladka="miasta">📍 Miasta</button>
+        <button type="button" data-zakladka="wyglad">🎨 Wygląd</button>
+        <button type="button" data-zakladka="ksiega">✍️ Księga</button>
+        <button type="button" id="wyloguj" class="wyloguj">Wyloguj</button>
+      </nav>
+      <div id="tresc"></div>
+    </div>
+
+    <div id="komunikat" class="komunikat" aria-live="polite"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="supabase.js"></script>
+  <script src="dane.js"></script>
+  <script src="narzedzia.js"></script>
+  <script src="motyw.js"></script>
+
+  <!-- Moduły panelu (admin.js na końcu – uruchamia resztę) -->
+  <script src="admin-wspolne.js"></script>
+  <script src="admin-edytor-motywu.js"></script>
+  <script src="admin-koncerty.js"></script>
+  <script src="admin-artysci.js"></script>
+  <script src="admin-miasta.js"></script>
+  <script src="admin-wyglad.js"></script>
+  <script src="admin-ksiega.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

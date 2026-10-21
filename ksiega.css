@@ -8,7 +8,7 @@
   padding: 10px;
   margin-bottom: 8px;
   background: rgba(10, 5, 20, 0.8);
-  border: 1px solid var(--ramka);
+  border: 1px solid var(--ramka-a);
   color: #fff;
   border-radius: 8px;
   font: 0.85rem var(--font);
@@ -29,3 +29,17 @@
 }
 
 .guestbook-info { clear: both; font-size: 0.8rem; color: var(--akcent2); min-height: 1em; padding-top: 6px; }
+
+/* Pole-pułapka na boty – niewidoczne dla ludzi */
+.pulapka { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* Wpisy gości */
+.wpisy { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.wpis {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--ramka-a);
+  background: color-mix(in srgb, var(--karta) 60%, transparent);
+}
+.wpis-tresc { font-size: 0.85rem; line-height: 1.4; white-space: pre-line; }
+.wpis-autor { font-size: 0.75rem; color: var(--akcent-jasny); margin-top: 4px; }

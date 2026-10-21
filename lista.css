@@ -5,9 +5,9 @@
 .menu-accordion { display: flex; flex-direction: column; gap: 8px; }
 
 .artist-item {
-  border: 1px solid var(--ramka);
+  border: 1px solid var(--ramka-a);
   border-radius: 10px;
-  background: rgba(30, 20, 50, 0.6);
+  background: color-mix(in srgb, var(--karta) 85%, transparent);
   overflow: hidden;
 }
 
@@ -29,7 +29,7 @@
 .shows-dropdown {
   padding: 8px 15px 12px;
   background: rgba(10, 5, 20, 0.5);
-  border-top: 1px solid var(--ramka);
+  border-top: 1px solid var(--ramka-a);
 }
 .shows-dropdown ul { list-style: none; }
 .shows-dropdown li { padding: 6px 0; font-size: 0.85rem; color: var(--akcent-jasny); }

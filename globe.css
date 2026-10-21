@@ -31,8 +31,8 @@
 .globe-tooltip {
   position: absolute;
   transform: translate(-50%, -100%);
-  background: rgba(20, 10, 40, 0.92);
-  border: 1px solid var(--ramka);
+  background: color-mix(in srgb, var(--karta) 92%, transparent);
+  border: 1px solid var(--ramka-a);
   color: var(--tekst);
   font-size: 0.75rem;
   font-weight: 600;
@@ -55,7 +55,7 @@
 }
 .city-badge {
   background: color-mix(in srgb, var(--akcent) 25%, transparent);
-  border: 1px solid var(--ramka);
+  border: 1px solid var(--ramka-a);
   padding: 5px 12px;
   border-radius: 20px;
   font: 600 0.75rem var(--font);

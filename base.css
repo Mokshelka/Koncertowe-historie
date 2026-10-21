@@ -7,10 +7,10 @@
 
 :root {
   --tlo: #0a0814;
-  --tlo-gradient: linear-gradient(135deg, #050508 0%, #120924 50%, #050508 100%);
+  --tlo2: #120924;
   --tlo-obraz: none;
-  --karta: rgba(26, 20, 42, 0.75);
-  --ramka: rgba(168, 85, 247, 0.25);
+  --karta: #1a142a;
+  --ramka: #a855f7;
   --akcent: #9333ea;
   --akcent-jasny: #c084fc;
   --akcent2: #e879f9;
@@ -18,6 +18,11 @@
   --tekst-slaby: #d8b4fe;
   --font: system-ui, -apple-system, sans-serif;
   --font-naglowkow: system-ui, -apple-system, sans-serif;
+
+  /* wyliczane z powyższych – nie trzeba ich ustawiać */
+  --tlo-gradient: linear-gradient(135deg, var(--tlo) 0%, var(--tlo2) 50%, var(--tlo) 100%);
+  --karta-a: color-mix(in srgb, var(--karta) 75%, transparent);
+  --ramka-a: color-mix(in srgb, var(--ramka) 30%, transparent);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,9 +58,9 @@ body {
 
 /* Karty / sekcje */
 section {
-  background: var(--karta);
+  background: var(--karta-a);
   backdrop-filter: blur(12px);
-  border: 1px solid var(--ramka);
+  border: 1px solid var(--ramka-a);
   border-radius: 16px;
   padding: 15px;
   margin-bottom: 15px;
@@ -66,5 +71,8 @@ section h2 {
   font-size: 1rem;
   margin-bottom: 10px;
 }
+
+/* Komunikat o błędzie ładowania */
+.blad-ladowania { text-align: center; font-size: 0.9rem; }
 
 footer { text-align: center; margin-top: 20px; color: var(--akcent-jasny); font-size: 0.75rem; }
