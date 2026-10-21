@@ -1,0 +1,45 @@
+/* =====================================================
+   LISTA ARTYSTÓW – rozwijane menu
+   ===================================================== */
+
+.menu-accordion { display: flex; flex-direction: column; gap: 8px; }
+
+.artist-item {
+  border: 1px solid var(--ramka);
+  border-radius: 10px;
+  background: rgba(30, 20, 50, 0.6);
+  overflow: hidden;
+}
+
+.artist-btn {
+  width: 100%;
+  padding: 12px 15px;
+  background: transparent;
+  border: none;
+  color: var(--tekst);
+  font: 600 0.95rem var(--font);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.artist-btn:hover { background: color-mix(in srgb, var(--akcent) 15%, transparent); }
+
+.shows-dropdown {
+  padding: 8px 15px 12px;
+  background: rgba(10, 5, 20, 0.5);
+  border-top: 1px solid var(--ramka);
+}
+.shows-dropdown ul { list-style: none; }
+.shows-dropdown li { padding: 6px 0; font-size: 0.85rem; color: var(--akcent-jasny); }
+
+.artist-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--akcent2);
+  text-decoration: none;
+}
+.artist-link:hover { text-decoration: underline; }

@@ -1,0 +1,31 @@
+/* =====================================================
+   KSIĘGA GOŚCI – formularz
+   ===================================================== */
+
+#guestbookForm input,
+#guestbookForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(10, 5, 20, 0.8);
+  border: 1px solid var(--ramka);
+  color: #fff;
+  border-radius: 8px;
+  font: 0.85rem var(--font);
+  outline: none;
+}
+#guestbookForm input:focus,
+#guestbookForm textarea:focus { border-color: var(--akcent-jasny); }
+
+#guestbookForm button {
+  background: linear-gradient(135deg, var(--akcent), var(--akcent-jasny));
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: bold 0.85rem var(--font);
+  float: right;
+}
+
+.guestbook-info { clear: both; font-size: 0.8rem; color: var(--akcent2); min-height: 1em; padding-top: 6px; }
