@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koncertownik 🎵</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="globe.css">
+  <link rel="stylesheet" href="lista.css">
+  <link rel="stylesheet" href="ksiega.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Nagłówek (treść z dane.js) -->
+    <header class="hero">
+      <h1 id="tytulStrony"></h1>
+      <p class="description" id="opisStrony"></p>
+    </header>
+
+    <!-- Globus z pinezkami + plakietki miast -->
+    <section class="map-section">
+      <div class="globe-container">
+        <canvas id="globe" aria-label="Obracający się globus z zaznaczonymi miastami koncertów"></canvas>
+        <div id="globeTooltip" class="globe-tooltip"></div>
+      </div>
+      <div class="cities-list" id="listaMiast"></div>
+    </section>
+
+    <!-- Lista artystów -->
+    <section>
+      <h2>🎤 Artyści</h2>
+      <div class="menu-accordion" id="artistList"></div>
+    </section>
+
+    <!-- Księga gości -->
+    <section class="guestbook-section">
+      <h2>✍️ Zostawcie wpis</h2>
+      <form id="guestbookForm">
+        <input type="text" placeholder="Imię / Nick z IG" required>
+        <textarea placeholder="Komentarz" rows="2" required></textarea>
+        <button type="submit">Wyślij</button>
+        <p id="guestbookInfo" class="guestbook-info" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer><p id="stopka"></p></footer>
+  </div>
+
+  <!-- Biblioteki do globusa -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+
+  <!-- Nasz kod (kolejność ma znaczenie: najpierw dane) -->
+  <script src="dane.js"></script>
+  <script src="narzedzia.js"></script>
+  <script src="motyw.js"></script>
+  <script src="glowna.js"></script>
+  <script src="globe.js"></script>
+  <script src="miasta.js"></script>
+  <script src="lista.js"></script>
+  <script src="ksiega.js"></script>
+</body>
+</html>
