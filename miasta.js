@@ -12,7 +12,7 @@ Koncertownik.miasta = { start() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'city-badge';
-    btn.textContent = '📍 ' + miasto.nazwa;
+    btn.innerHTML = `<i class="ph ph-map-pin" aria-hidden="true"></i> ${Koncertownik.narzedzia.esc(miasto.nazwa)}`;
 
     btn.addEventListener('click', () => {
       lista.querySelectorAll('.city-badge').forEach(b => b.classList.remove('active'));

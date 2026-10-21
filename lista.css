@@ -1,45 +1,68 @@
 /* =====================================================
-   LISTA ARTYSTÓW – rozwijane menu
+   ARTYŚCI – siatka kafelków
    ===================================================== */
 
-.menu-accordion { display: flex; flex-direction: column; gap: 8px; }
+.naglowek-artystow { display: flex; align-items: baseline; justify-content: space-between; }
+.liczba { font-size: 0.8rem; color: var(--tekst-slaby); font-weight: 400; }
 
-.artist-item {
-  border: 1px solid var(--ramka-a);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--karta) 85%, transparent);
-  overflow: hidden;
+.siatka-artystow {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
 }
 
-.artist-btn {
-  width: 100%;
-  padding: 12px 15px;
-  background: transparent;
-  border: none;
-  color: var(--tekst);
-  font: 600 0.95rem var(--font);
-  text-align: left;
-  cursor: pointer;
+/* Kafelek w kolorach artysty (zmienne --k-… ustawia lista.js) */
+.kafelek {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-}
-.artist-btn:hover { background: color-mix(in srgb, var(--akcent) 15%, transparent); }
-
-.shows-dropdown {
-  padding: 8px 15px 12px;
-  background: rgba(10, 5, 20, 0.5);
-  border-top: 1px solid var(--ramka-a);
-}
-.shows-dropdown ul { list-style: none; }
-.shows-dropdown li { padding: 6px 0; font-size: 0.85rem; color: var(--akcent-jasny); }
-
-.artist-link {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--akcent2);
+  justify-content: center;
+  gap: 6px;
+  min-height: 140px;
+  padding: 16px 10px 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--k-ramka) 35%, transparent);
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--k-akcent) 45%, transparent), transparent 70%),
+    color-mix(in srgb, var(--k-karta) 90%, transparent);
+  color: var(--k-tekst);
+  text-align: center;
   text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
-.artist-link:hover { text-decoration: underline; }
+.kafelek:hover,
+.kafelek:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--k-jasny);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--k-akcent) 45%, transparent);
+  outline: none;
+}
+
+.kafelek-ikona {
+  font-size: 2.4rem;
+  color: var(--k-akcent2);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--k-akcent) 70%, transparent));
+  transition: transform 0.3s;
+}
+.kafelek:hover .kafelek-ikona { transform: scale(1.12) rotate(-6deg); }
+
+.kafelek-nazwa {
+  font-family: var(--k-font);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+}
+.kafelek-licznik {
+  font-size: 0.7rem;
+  color: var(--k-jasny);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kafelek, .kafelek-ikona { transition: none; }
+  .kafelek:hover, .kafelek:hover .kafelek-ikona { transform: none; }
+}

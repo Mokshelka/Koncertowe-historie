@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koncertownik 🎵</title>
+  <title>Koncertownik</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="artysta.css">
 </head>
 <body>
   <div class="container container-szeroki">
 
-    <a class="powrot" href="index.html">← Wszystkie koncerty</a>
+    <a class="powrot" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Wszystkie koncerty</a>
 
     <header class="hero">
+      <div id="ikonaArtysty" class="ikona-artysty"></div>
       <h1 id="nazwaArtysty"></h1>
     </header>
 
@@ -27,6 +30,7 @@
   <script src="dane.js"></script>
   <script src="narzedzia.js"></script>
   <script src="motyw.js"></script>
+  <script src="ikony.js"></script>
   <script src="artysta.js"></script>
 </body>
 </html>

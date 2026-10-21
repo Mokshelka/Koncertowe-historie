@@ -45,7 +45,7 @@ Koncertownik.ksiega = {
       info.textContent = 'Ups, nie udało się wysłać. Spróbuj jeszcze raz.';
       return;
     }
-    info.textContent = 'Dziękuję za wpis! ✨';
+    info.textContent = 'Dziękuję za wpis!';
     form.reset();
     this.pokazWpisy();
     setTimeout(() => { info.textContent = ''; }, 4000);

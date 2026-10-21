@@ -32,3 +32,13 @@
 }
 
 .pusto { font-size: 0.9rem; color: var(--tekst-slaby); text-align: center; }
+
+/* Duża ikona artysty nad nazwą */
+.ikona-artysty {
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--akcent2);
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--akcent) 70%, transparent));
+  margin-bottom: 6px;
+}
+.koncert h2 .ph, .miejsce .ph, .koncert h3 .ph { color: var(--akcent-jasny); }

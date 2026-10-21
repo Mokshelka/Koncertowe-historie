@@ -55,7 +55,7 @@ Koncertownik.admin.koncerty = {
             <select name="miasto"><option value="">— wybierz —</option>${opcje(miasta, k.miasto, m => m.nazwa, m => m.nazwa)}</select>
           </label>
         </div>
-        <small class="podpowiedz">Brakuje miasta? Dodaj je w zakładce 📍 Miasta.</small>
+        <small class="podpowiedz">Brakuje miasta? Dodaj je w zakładce Miasta.</small>
         <label>Miejsce (klub, hala) <input type="text" name="miejsce" value="${esc(k.miejsce || '')}"></label>
         <label>Setlista <small>(jedna piosenka w linii)</small>
           <textarea name="setlista" rows="6">${esc((k.setlista || []).join('\n'))}</textarea>
@@ -64,7 +64,7 @@ Koncertownik.admin.koncerty = {
           <textarea name="filmy" rows="3" placeholder="https://youtu.be/…">${esc((k.filmy || []).join('\n'))}</textarea>
         </label>
         <fieldset class="bilety">
-          <legend>🔒 Bilety (prywatne – widzisz je tylko Ty)</legend>
+          <legend><i class="ph ph-lock-simple"></i> Bilety (prywatne – widzisz je tylko Ty)</legend>
           <ul class="lista-biletow"></ul>
           <input type="file" name="bilety" multiple accept="image/*,application/pdf">
         </fieldset>
@@ -128,7 +128,7 @@ Koncertownik.admin.koncerty = {
     if (error) { ul.innerHTML = '<li>Nie udało się wczytać biletów</li>'; return; }
     ul.innerHTML = data.map(b => `
       <li>
-        <span>🎫 ${esc(b.nazwa)}</span>
+        <span><i class="ph ph-ticket"></i> ${esc(b.nazwa)}</span>
         <span class="akcje">
           <button type="button" class="btn btn-maly" data-otworz="${esc(b.sciezka)}">Otwórz</button>
           <button type="button" class="btn btn-maly btn-usun" data-usun-bilet="${b.id}" data-sciezka="${esc(b.sciezka)}">Usuń</button>

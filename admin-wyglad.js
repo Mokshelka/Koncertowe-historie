@@ -16,7 +16,7 @@ Koncertownik.admin.wyglad = {
           <label>Tytuł <input type="text" name="tytul" value="${esc(u.tytul)}"></label>
           <label>Opis pod tytułem <textarea name="opis" rows="3">${esc(u.opis)}</textarea></label>
           <label>Stopka <input type="text" name="stopka" value="${esc(u.stopka)}"></label>
-          <h3>🎨 Kolory, tło i czcionki</h3>
+          <h3><i class="ph ph-palette"></i> Kolory, tło i czcionki</h3>
           <small class="podpowiedz">Zmiany od razu widać na panelu. Artyści z własnym motywem nadpisują tylko swoje kolory.</small>
           ${E.html(Koncertownik.motyw.strony())}
           <div class="rzad">

@@ -1,5 +1,7 @@
 # 🎵 Koncertownik
 
+Strona: https://mokshelka.github.io/Koncertowe-historie/ · Panel: …/admin.html
+
 Mój cyfrowy pamiętnik koncertowy: globus z miastami, artyści, setlisty i nagrania.
 
 ## Struktura plików
@@ -24,15 +26,15 @@ glowna.js      uruchamia stronę główną
 globe.js       globus
 miasta.js      plakietki miast
 lista.js       lista artystów
-ksiega.js      księga gości (na razie bez zapisu)
+ksiega.js      księga gości
 artysta.js     podstrona artysty
-```
 
 admin.html     panel admina (logowanie)
 admin.css      wygląd panelu
 admin.js       logowanie i zakładki
 admin-*.js     zakładki panelu: koncerty, artyści, miasta, wygląd, księga
 baza.sql       budowa bazy w Supabase (uruchamiana raz)
+```
 
 ## Jak dodać koncert, artystę, zmienić wygląd
 
@@ -47,7 +49,7 @@ Bilety wgrane przy koncercie są prywatne – widzisz je tylko Ty.
 4. Po minucie strona działa pod `https://TWOJ-NICK.github.io/koncertownik/`.
 
 ⚠️ Repozytorium jest publiczne – nie wrzucaj tu biletów ani innych prywatnych plików.
-Na nie przygotujemy prywatny schowek w Supabase.
+Bilety trzymamy w prywatnym schowku Supabase (wgrywasz je w panelu).
 
 ## Plan
 

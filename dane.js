@@ -23,7 +23,7 @@ Koncertownik.wczytajDane = async function () {
   const u = ustawienia.data || {};
   Koncertownik.dane = {
     ustawienia: {
-      tytul:  u.tytul  || '🎵 KONCERTOWNIK',
+      tytul:  u.tytul  || 'KONCERTOWNIK',
       opis:   u.opis   || '',
       stopka: u.stopka || '',
       motyw:  u.motyw  || {}
@@ -40,6 +40,6 @@ Koncertownik.bladLadowania = function (blad) {
   console.error(blad);
   const div = document.createElement('section');
   div.className = 'blad-ladowania';
-  div.textContent = 'Nie udało się wczytać danych 😢 Spróbuj odświeżyć stronę za chwilę.';
+  div.textContent = 'Nie udało się wczytać danych. Spróbuj odświeżyć stronę za chwilę.';
   document.querySelector('.container')?.prepend(div);
 };

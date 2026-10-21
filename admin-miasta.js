@@ -45,7 +45,7 @@ Koncertownik.admin.miasta = {
       <form class="formularz ramka-formularza">
         <h3>${m.id ? 'Edycja miasta' : 'Nowe miasto'}</h3>
         <label>Nazwa <input type="text" name="nazwa" value="${esc(m.nazwa || '')}" required></label>
-        <button type="button" class="btn btn-szary" data-szukaj>🔎 Znajdź współrzędne</button>
+        <button type="button" class="btn btn-szary" data-szukaj><i class="ph ph-magnifying-glass"></i> Znajdź współrzędne</button>
         <div class="rzad">
           <label>Szerokość geogr. <input type="number" step="any" name="szerokosc" value="${m.szerokosc ?? ''}" required></label>
           <label>Długość geogr. <input type="number" step="any" name="dlugosc" value="${m.dlugosc ?? ''}" required></label>

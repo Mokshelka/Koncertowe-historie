@@ -14,7 +14,8 @@
 
   const u = Koncertownik.dane.ustawienia;
   Koncertownik.motyw.zastosuj();
-  document.getElementById('tytulStrony').textContent = u.tytul;
+  // emotka na początku tytułu nie jest potrzebna – jest ikona
+  document.getElementById('tytulStrony').textContent = u.tytul.replace(/^[\p{Extended_Pictographic}\uFE0F\s]+/u, '');
   document.getElementById('opisStrony').textContent = u.opis;
   document.getElementById('stopka').textContent = u.stopka;
 

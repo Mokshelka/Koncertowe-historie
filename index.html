@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koncertownik 🎵</title>
+  <title>Koncertownik</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="globe.css">
   <link rel="stylesheet" href="lista.css">
@@ -14,7 +16,7 @@
 
     <!-- Nagłówek (treść z dane.js) -->
     <header class="hero">
-      <h1 id="tytulStrony">🎵</h1>
+      <h1><i class="ph ph-vinyl-record" aria-hidden="true"></i> <span id="tytulStrony"></span></h1>
       <p class="description" id="opisStrony"></p>
     </header>
 
@@ -29,13 +31,16 @@
 
     <!-- Lista artystów -->
     <section>
-      <h2>🎤 Artyści</h2>
-      <div class="menu-accordion" id="artistList"></div>
+      <h2 class="naglowek-artystow">
+        <span><i class="ph ph-microphone-stage" aria-hidden="true"></i> Artyści</span>
+        <span class="liczba" id="liczbaArtystow"></span>
+      </h2>
+      <div class="siatka-artystow" id="artistList"></div>
     </section>
 
     <!-- Księga gości -->
     <section class="guestbook-section">
-      <h2>✍️ Zostawcie wpis</h2>
+      <h2><i class="ph ph-pen-nib" aria-hidden="true"></i> Zostawcie wpis</h2>
       <form id="guestbookForm">
         <input type="text" name="imie" placeholder="Imię / Nick z IG" maxlength="60" required>
         <textarea name="tresc" placeholder="Komentarz" rows="2" maxlength="500" required></textarea>
@@ -61,6 +66,7 @@
   <script src="dane.js"></script>
   <script src="narzedzia.js"></script>
   <script src="motyw.js"></script>
+  <script src="ikony.js"></script>
   <script src="globe.js"></script>
   <script src="miasta.js"></script>
   <script src="lista.js"></script>

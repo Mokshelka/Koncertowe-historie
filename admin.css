@@ -108,3 +108,24 @@ section h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--akcent2); }
 
 /* Przycisk-etykieta do wybierania pliku */
 .formularz label.btn { flex: 0 0 auto; display: inline-block; color: #fff; font-size: 0.75rem; }
+
+/* Wybór ikony artysty */
+.wybor-ikon { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 6px; }
+.ikona-opcja {
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  font-size: 1.4rem;
+  border-radius: 8px;
+  border: 1px solid var(--ramka-a);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--akcent2);
+  cursor: pointer;
+}
+.ikona-opcja:hover { border-color: var(--akcent-jasny); }
+.ikona-opcja.wybrana { background: var(--akcent); color: #fff; border-color: var(--akcent-jasny); }
+.formularz label a { color: var(--akcent2); }
+
+/* Ikona przy nazwie na liście */
+.z-ikona { display: flex; align-items: center; gap: 10px; }
+.ikona-listy { font-size: 1.6rem; color: var(--akcent2); }
+.zakladki .ph { font-size: 1.05em; }

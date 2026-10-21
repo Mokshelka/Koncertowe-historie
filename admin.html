@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Panel – Koncertownik</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="admin.css">
 </head>
@@ -12,8 +14,8 @@
   <div class="container container-admin">
 
     <header class="hero">
-      <h1>🔐 Panel</h1>
-      <a class="link-strona" href="index.html" target="_blank">Otwórz stronę ↗</a>
+      <h1><i class="ph ph-lock-key" aria-hidden="true"></i> Panel</h1>
+      <a class="link-strona" href="index.html" target="_blank">Otwórz stronę <i class="ph ph-arrow-square-out" aria-hidden="true"></i></a>
     </header>
 
     <!-- Logowanie -->
@@ -29,12 +31,12 @@
     <!-- Panel po zalogowaniu -->
     <div id="panel" hidden>
       <nav class="zakladki">
-        <button type="button" data-zakladka="koncerty">🎤 Koncerty</button>
-        <button type="button" data-zakladka="artysci">⭐ Artyści</button>
-        <button type="button" data-zakladka="miasta">📍 Miasta</button>
-        <button type="button" data-zakladka="wyglad">🎨 Wygląd</button>
-        <button type="button" data-zakladka="ksiega">✍️ Księga</button>
-        <button type="button" id="wyloguj" class="wyloguj">Wyloguj</button>
+        <button type="button" data-zakladka="koncerty"><i class="ph ph-ticket"></i> Koncerty</button>
+        <button type="button" data-zakladka="artysci"><i class="ph ph-microphone-stage"></i> Artyści</button>
+        <button type="button" data-zakladka="miasta"><i class="ph ph-map-pin"></i> Miasta</button>
+        <button type="button" data-zakladka="wyglad"><i class="ph ph-palette"></i> Wygląd</button>
+        <button type="button" data-zakladka="ksiega"><i class="ph ph-pen-nib"></i> Księga</button>
+        <button type="button" id="wyloguj" class="wyloguj"><i class="ph ph-sign-out"></i> Wyloguj</button>
       </nav>
       <div id="tresc"></div>
     </div>
@@ -47,6 +49,7 @@
   <script src="dane.js"></script>
   <script src="narzedzia.js"></script>
   <script src="motyw.js"></script>
+  <script src="ikony.js"></script>
 
   <!-- Moduły panelu (admin.js na końcu – uruchamia resztę) -->
   <script src="admin-wspolne.js"></script>

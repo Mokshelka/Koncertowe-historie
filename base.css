@@ -40,7 +40,7 @@ body {
   justify-content: center;
 }
 
-.container { width: 100%; max-width: 460px; }
+.container { width: 100%; max-width: 560px; }
 
 /* Nagłówek strony */
 .hero { text-align: center; padding: 20px 10px; }
@@ -71,6 +71,10 @@ section h2 {
   font-size: 1rem;
   margin-bottom: 10px;
 }
+
+/* Ikony (Phosphor) – wyrównanie do tekstu */
+.ph, .ph-duotone { vertical-align: -0.125em; }
+.hero h1 .ph { font-size: 0.9em; }
 
 /* Komunikat o błędzie ładowania */
 .blad-ladowania { text-align: center; font-size: 0.9rem; }

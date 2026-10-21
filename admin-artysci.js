@@ -19,7 +19,7 @@ Koncertownik.admin.artysci = {
         <ul class="lista-admin">
           ${artysci.map(a => `
             <li>
-              <span><b>${esc(a.nazwa)}</b><br><small>koncertów: ${ile(a.id)}${Object.keys(a.motyw || {}).length ? ' · 🎨 własny motyw' : ''}</small></span>
+              <span class="z-ikona">${Koncertownik.ikony.html(a.motyw?.ikona, 'duotone', 'ikona-listy')}<span><b>${esc(a.nazwa)}</b><br><small>koncertów: ${ile(a.id)}${Object.keys(a.motyw || {}).some(k => k !== 'ikona') ? ' · własny motyw' : ''}</small></span></span>
               <span class="akcje">
                 <button type="button" class="btn btn-maly" data-edytuj="${esc(a.id)}">Edytuj</button>
                 <button type="button" class="btn btn-maly btn-usun" data-usun="${esc(a.id)}">Usuń</button>
@@ -45,7 +45,9 @@ Koncertownik.admin.artysci = {
         <h3>${a.id ? 'Edycja: ' + esc(a.nazwa) : 'Nowy artysta'}</h3>
         <label>Nazwa <input type="text" name="nazwa" value="${esc(a.nazwa || '')}" required></label>
         <label>Kolejność na liście <input type="number" name="kolejnosc" value="${a.kolejnosc ?? 0}"></label>
-        <h3>🎨 Motyw podstrony</h3>
+        <h3><i class="ph ph-shapes"></i> Ikona</h3>
+        ${this.wyborIkony(a.motyw?.ikona || Koncertownik.ikony.DOMYSLNA)}
+        <h3><i class="ph ph-palette"></i> Motyw podstrony</h3>
         <small class="podpowiedz">Zmieniaj kolory – panel od razu pokazuje podgląd. Zapisane zostaną tylko wartości inne niż wygląd całej strony.</small>
         ${E.html({ ...motywStrony, ...(a.motyw || {}) })}
         <div class="rzad">
@@ -58,6 +60,7 @@ Koncertownik.admin.artysci = {
 
     const form = el.querySelector('form');
     E.podepnij(form, motywStrony);
+    this.podepnijIkony(form);
     Koncertownik.motyw.zastosuj(a.motyw);
     form.querySelector('[data-anuluj]').onclick = () => { el.innerHTML = ''; Koncertownik.motyw.zastosuj(); };
     form.querySelector('[data-reset]').onclick = () => this.formularz(el, { ...a, motyw: {} });
@@ -70,6 +73,8 @@ Koncertownik.admin.artysci = {
     // Zapisujemy tylko to, co różni się od wyglądu strony
     const motyw = Object.fromEntries(Object.entries(A.edytorMotywu.odczytaj(form))
       .filter(([k, v]) => v !== (motywStrony[k] ?? '')));
+    const ikona = form.ikona.value.trim().toLowerCase();
+    if (ikona && ikona !== Koncertownik.ikony.DOMYSLNA) motyw.ikona = ikona;
 
     const wiersz = {
       nazwa: form.nazwa.value.trim(),
@@ -87,6 +92,31 @@ Koncertownik.admin.artysci = {
     if (A.blad(error, 'Nie udało się zapisać')) return;
     A.komunikat('Zapisano ✔');
     A.odswiez();
+  },
+
+  // --- Wybór ikony ---
+  wyborIkony(aktualna) {
+    const I = Koncertownik.ikony;
+    return `
+      <div class="wybor-ikon">
+        ${I.LISTA.map(n => `
+          <button type="button" class="ikona-opcja ${n === aktualna ? 'wybrana' : ''}" data-ikona="${n}" title="${n}">
+            ${I.html(n, 'duotone')}
+          </button>`).join('')}
+      </div>
+      <label>Albo wpisz dowolną nazwę z <a href="https://phosphoricons.com" target="_blank">phosphoricons.com</a>
+        <input type="text" name="ikona" value="${Koncertownik.narzedzia.esc(aktualna)}">
+      </label>`;
+  },
+
+  podepnijIkony(form) {
+    const zaznacz = nazwa => form.querySelectorAll('.ikona-opcja').forEach(b =>
+      b.classList.toggle('wybrana', b.dataset.ikona === nazwa));
+    form.querySelectorAll('.ikona-opcja').forEach(b => b.onclick = () => {
+      form.ikona.value = b.dataset.ikona;
+      zaznacz(b.dataset.ikona);
+    });
+    form.ikona.addEventListener('input', () => zaznacz(form.ikona.value.trim()));
   },
 
   async usun(id, ileKoncertow) {

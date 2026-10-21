@@ -68,3 +68,5 @@
   background: color-mix(in srgb, var(--akcent) 50%, transparent);
   box-shadow: 0 0 12px color-mix(in srgb, var(--akcent) 60%, transparent);
 }
+
+.city-badge .ph { font-size: 0.95em; }
