@@ -17,17 +17,18 @@
       </p>
     </header>
 
-    <!-- Obracający się globus 3D z lądami i siatką -->
+    <!-- Obracający się globus z granicami krajów i pinezkami -->
     <section class="map-section">
       <div class="globe-container">
-        <div class="globe"></div>
+        <canvas id="globe" aria-label="Obracający się globus z zaznaczonymi miastami koncertów"></canvas>
+        <div id="globeTooltip" class="globe-tooltip"></div>
       </div>
       <div class="cities-list">
-        <span class="city-badge">📍 Wrocław</span>
-        <span class="city-badge">📍 Kraków</span>
-        <span class="city-badge">📍 Warszawa</span>
-        <span class="city-badge">📍 Lublin</span>
-        <span class="city-badge">📍 Kopenhaga</span>
+        <button type="button" class="city-badge" data-city="Wrocław">📍 Wrocław</button>
+        <button type="button" class="city-badge" data-city="Kraków">📍 Kraków</button>
+        <button type="button" class="city-badge" data-city="Warszawa">📍 Warszawa</button>
+        <button type="button" class="city-badge" data-city="Lublin">📍 Lublin</button>
+        <button type="button" class="city-badge" data-city="Kopenhaga">📍 Kopenhaga</button>
       </div>
     </section>
 
@@ -52,6 +53,9 @@
 
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script src="globe.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
