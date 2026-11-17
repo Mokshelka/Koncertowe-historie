@@ -1,0 +1,134 @@
+/* =====================================================
+   STRONA ARTYSTY – TRYB EDYCJI
+   (formularze i przyciski bierze z admin.css)
+   ===================================================== */
+
+body.tryb-edycji { padding-bottom: 90px; }
+
+/* Pasek na dole ekranu */
+.pasek-edycji {
+  position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%);
+  z-index: 30;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px 8px 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--karta) 92%, black);
+  border: 1px solid var(--ramka-a);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: calc(100% - 24px);
+}
+.pasek-tytul { font-size: 0.8rem; color: var(--tekst-slaby); white-space: nowrap; }
+.pasek-edycji .btn { border-radius: 999px; white-space: nowrap; }
+@media (max-width: 480px) { .pasek-tytul { display: none; } }
+
+/* Przyciski przy koncertach */
+.btn-edycji {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px dashed var(--akcent-jasny);
+  background: color-mix(in srgb, var(--akcent) 15%, transparent);
+  color: var(--tekst);
+  font: 600 0.75rem var(--font);
+  cursor: pointer;
+}
+.btn-edycji:hover { background: color-mix(in srgb, var(--akcent) 35%, transparent); }
+.btn-dodaj-koncert { width: 100%; justify-content: center; padding: 12px; margin-bottom: 15px; font-size: 0.85rem; }
+.koncert-akcje { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* Zdjęcie / nagranie w trybie edycji */
+.media-akcje {
+  position: absolute; top: 6px; right: 6px;
+  display: flex; gap: 4px;
+}
+.media-akcje button {
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border: none; border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.media-akcje button:hover { background: var(--akcent); }
+.media.prywatne img, .media.prywatne iframe, .media.prywatne video { outline: 2px dashed #fbbf24; outline-offset: 2px; opacity: 0.75; }
+.media.prywatne [data-akcja="przelacz"] { background: #b45309; }
+.bilet-pdf {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  aspect-ratio: 1; border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--tekst); text-decoration: none; font-size: 0.75rem; text-align: center; padding: 8px;
+}
+.bilet-pdf .ph-duotone { font-size: 2.4rem; color: var(--akcent2); }
+
+/* Szuflada z wyglądem */
+.szuflada {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 40;
+  width: min(440px, 100%);
+  overflow-y: auto;
+  padding: 16px 16px 24px;
+  background: color-mix(in srgb, var(--karta) 96%, black);
+  border-left: 1px solid var(--ramka-a);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+}
+.szuflada-naglowek { display: flex; justify-content: space-between; align-items: center; }
+.szuflada-naglowek h2 { font-size: 1rem; }
+.szuflada details { border-top: 1px solid var(--ramka-a); padding-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+.szuflada summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--akcent2); margin-bottom: 8px; }
+.szuflada details[open] > *:not(summary) { margin-bottom: 10px; }
+.szuflada .edytor-motywu { grid-template-columns: 1fr 1fr; }
+.szuflada-stopka {
+  position: sticky; bottom: -24px;
+  display: flex; gap: 8px;
+  padding: 12px 0;
+  background: color-mix(in srgb, var(--karta) 96%, black);
+}
+.btn-ikona { background: none; border: none; color: var(--tekst); font-size: 1.3rem; cursor: pointer; }
+.pole-wyboru { flex-direction: row !important; align-items: center; justify-content: flex-start; gap: 8px !important; }
+.szukaj-ikon {
+  width: 100%; padding: 9px 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--ramka-a);
+  color: var(--tekst); border-radius: 8px;
+  font: 0.9rem var(--font);
+  margin: 6px 0;
+}
+.wybrane-dekor { display: flex; flex-wrap: wrap; gap: 6px; }
+.zeton {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 8px; border-radius: 999px;
+  border: 1px solid var(--ramka-a);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--akcent2); font-size: 1.1rem; cursor: pointer;
+}
+.zeton .ph { font-size: 0.7rem; color: var(--tekst-slaby); }
+
+/* Okienka (dialog) */
+.okno {
+  margin: auto;
+  width: min(520px, calc(100% - 24px));
+  max-height: calc(100% - 24px);
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--ramka-a);
+  background: color-mix(in srgb, var(--karta) 96%, black);
+  color: var(--tekst);
+}
+.okno::backdrop { background: rgba(0, 0, 0, 0.7); }
+.okno h2 { font-size: 1.05rem; }
+.okno h2 small { font-weight: 400; color: var(--tekst-slaby); font-size: 0.8rem; }
+.wybor-typu { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; }
+.wybor-typu label { display: block; }
+.wybor-typu input { position: absolute; opacity: 0; }
+.wybor-typu span {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 10px 6px; border-radius: 10px;
+  border: 1px solid var(--ramka-a);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--tekst); font-size: 0.8rem; cursor: pointer; text-align: center;
+}
+.wybor-typu .ph-duotone { font-size: 1.6rem; color: var(--akcent2); }
+.wybor-typu input:checked + span { background: var(--akcent); border-color: var(--akcent-jasny); }
+.wybor-typu input:checked + span .ph-duotone { color: #fff; }
+.wybor-typu input:focus-visible + span { outline: 2px solid var(--akcent-jasny); }
+.postep { font-size: 0.8rem; color: var(--akcent2); min-height: 1em; }

@@ -18,6 +18,8 @@
   --tekst-slaby: #d8b4fe;
   --font: system-ui, -apple-system, sans-serif;
   --font-naglowkow: system-ui, -apple-system, sans-serif;
+  --promien: 16px;
+  --przyciemnienie: 0;
 
   /* wyliczane z powyższych – nie trzeba ich ustawiać */
   --tlo-gradient: linear-gradient(135deg, var(--tlo) 0%, var(--tlo2) 50%, var(--tlo) 100%);
@@ -26,11 +28,15 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 
 body {
   font-family: var(--font);
   background-color: var(--tlo);
-  background-image: var(--tlo-obraz), var(--tlo-gradient);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, var(--przyciemnienie)), rgba(0, 0, 0, var(--przyciemnienie))),
+    var(--tlo-obraz), var(--tlo-gradient);
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   color: var(--tekst);
@@ -61,7 +67,7 @@ section {
   background: var(--karta-a);
   backdrop-filter: blur(12px);
   border: 1px solid var(--ramka-a);
-  border-radius: 16px;
+  border-radius: var(--promien);
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);

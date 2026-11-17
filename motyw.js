@@ -23,8 +23,13 @@ Koncertownik.motyw = {
     font:         '',          // nazwa z Google Fonts (puste = systemowa)
     fontNaglowkow:'',
     globusLad:    '#6d28d9',
-    globusOcean:  '#2a0f4f'
+    globusOcean:  '#2a0f4f',
+    promien:      16,          // zaokrąglenie kart w px
+    przyciemnienie: 0          // przyciemnienie zdjęcia tła, 0–90 (%)
   },
+
+  // Ustawienia strony artysty, które nie są zmiennymi CSS
+  NIE_CSS: ['ikona', 'baner', 'logo', 'ikonyDekor', 'ukryjNazwe'],
 
   // Motyw strony (bez artysty)
   strony() {
@@ -37,6 +42,7 @@ Koncertownik.motyw = {
     const root = document.documentElement.style;
 
     Object.entries(motyw).forEach(([klucz, wartosc]) => {
+      if (this.NIE_CSS.includes(klucz)) return;
       const nazwa = '--' + klucz.replace(/[A-Z]/g, l => '-' + l.toLowerCase());
       root.setProperty(nazwa, this.naCss(klucz, wartosc));
     });
@@ -49,6 +55,8 @@ Koncertownik.motyw = {
 
   naCss(klucz, wartosc) {
     if (klucz === 'tloObraz') return wartosc ? `url("${wartosc}")` : 'none';
+    if (klucz === 'promien') return `${Number(wartosc) || 0}px`;
+    if (klucz === 'przyciemnienie') return String((Number(wartosc) || 0) / 100);
     if (klucz.startsWith('font')) {
       return wartosc ? `'${wartosc}', system-ui, sans-serif` : 'system-ui, -apple-system, sans-serif';
     }

@@ -8,22 +8,33 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="artysta.css">
+  <link rel="stylesheet" href="bloki.css">
 </head>
 <body>
+  <!-- Ikony dekoracyjne w tle (ustawiane w trybie edycji) -->
+  <div id="dekor" class="dekor" aria-hidden="true"></div>
+
   <div class="container container-szeroki">
 
     <a class="powrot" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Wszystkie koncerty</a>
 
-    <header class="hero">
+    <!-- Nagłówek artysty: baner, logo/ikona, nazwa, opis -->
+    <header class="hero hero-artysty">
+      <div id="banerArtysty" class="baner" hidden></div>
       <div id="ikonaArtysty" class="ikona-artysty"></div>
+      <img id="logoArtysty" class="logo-artysty" alt="" hidden>
       <h1 id="nazwaArtysty"></h1>
+      <p id="opisArtysty" class="opis-artysty" hidden></p>
     </header>
 
-    <!-- Tu artysta.js wstawia karty koncertów -->
-    <div id="koncerty"></div>
+    <!-- Bloki strony artysty (tekst, zdjęcia, kolaż, koncerty…) – rysuje je bloki.js -->
+    <div id="bloki" class="bloki"></div>
 
     <footer><p id="stopka"></p></footer>
   </div>
+
+  <!-- Powiększone zdjęcie -->
+  <div id="lightbox" class="lightbox" hidden><img alt=""></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script src="supabase.js"></script>
@@ -31,6 +42,9 @@
   <script src="narzedzia.js"></script>
   <script src="motyw.js"></script>
   <script src="ikony.js"></script>
+  <script src="media.js"></script>
+  <script src="bloki.js"></script>
   <script src="artysta.js"></script>
+  <!-- Skrypty trybu edycji ładują się same, tylko gdy jesteś zalogowana -->
 </body>
 </html>

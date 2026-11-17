@@ -60,14 +60,12 @@ Koncertownik.admin.koncerty = {
         <label>Setlista <small>(jedna piosenka w linii)</small>
           <textarea name="setlista" rows="6">${esc((k.setlista || []).join('\n'))}</textarea>
         </label>
-        <label>Nagrania z YouTube <small>(jeden link w linii)</small>
-          <textarea name="filmy" rows="3" placeholder="https://youtu.be/…">${esc((k.filmy || []).join('\n'))}</textarea>
-        </label>
         <fieldset class="bilety">
           <legend><i class="ph ph-lock-simple"></i> Bilety (prywatne – widzisz je tylko Ty)</legend>
           <ul class="lista-biletow"></ul>
           <input type="file" name="bilety" multiple accept="image/*,application/pdf">
         </fieldset>
+        <small class="podpowiedz"><i class="ph ph-info"></i> Zdjęcia, nagrania i foldery z Dysku dodajesz na stronie artysty (przycisk „Dodaj” przy koncercie).</small>
         <div class="rzad">
           <button type="submit" class="btn">Zapisz</button>
           <button type="button" class="btn btn-szary" data-anuluj>Anuluj</button>
@@ -88,8 +86,7 @@ Koncertownik.admin.koncerty = {
       data:       form.data.value || null,
       miasto:     form.miasto.value || null,
       miejsce:    form.miejsce.value.trim() || null,
-      setlista:   A.linie(form.setlista.value),
-      filmy:      A.linie(form.filmy.value)
+      setlista:   A.linie(form.setlista.value)
     };
 
     const zapytanie = k.id
@@ -100,9 +97,10 @@ Koncertownik.admin.koncerty = {
 
     // Nowe bilety wgrywamy dopiero, gdy koncert ma już swoje id
     for (const plik of form.bilety.files) {
-      const sciezka = await A.wgrajPlik('bilety', plik, zapisany.id);
+      const sciezka = await A.wgrajPlik('media', plik, zapisany.id);
       if (sciezka) {
-        await Koncertownik.db.from('bilety').insert({ koncert_id: zapisany.id, sciezka, nazwa: plik.name });
+        await Koncertownik.db.from('media').insert({ koncert_id: zapisany.id, typ: 'bilet', zrodlo: 'plik',
+          schowek: 'media', adres: sciezka, opis: plik.name, publiczne: false });
       }
     }
 
@@ -111,10 +109,10 @@ Koncertownik.admin.koncerty = {
   },
 
   async usun(id) {
-    if (!confirm('Na pewno usunąć ten koncert razem z biletami?')) return;
+    if (!confirm('Na pewno usunąć ten koncert razem ze zdjęciami, nagraniami i biletami?')) return;
     const A = Koncertownik.admin;
-    const { data: bilety } = await Koncertownik.db.from('bilety').select('sciezka').eq('koncert_id', id);
-    if (bilety?.length) await Koncertownik.db.storage.from('bilety').remove(bilety.map(b => b.sciezka));
+    const { data: media } = await Koncertownik.db.from('media').select('*').eq('koncert_id', id);
+    if (media?.length) await Koncertownik.media.usunPliki(media);
     const { error } = await Koncertownik.db.from('koncerty').delete().eq('id', id);
     if (A.blad(error, 'Nie udało się usunąć')) return;
     A.komunikat('Usunięto');
@@ -124,28 +122,30 @@ Koncertownik.admin.koncerty = {
   // --- Bilety ---
   async pokazBilety(ul, koncertId) {
     const { esc } = Koncertownik.narzedzia;
-    const { data, error } = await Koncertownik.db.from('bilety').select('*').eq('koncert_id', koncertId).order('utworzono');
+    const { data, error } = await Koncertownik.db.from('media').select('*')
+      .eq('koncert_id', koncertId).eq('typ', 'bilet').order('utworzono');
     if (error) { ul.innerHTML = '<li>Nie udało się wczytać biletów</li>'; return; }
     ul.innerHTML = data.map(b => `
       <li>
-        <span><i class="ph ph-ticket"></i> ${esc(b.nazwa)}</span>
+        <span><i class="ph ph-ticket"></i> ${esc(b.opis || 'bilet')}</span>
         <span class="akcje">
-          <button type="button" class="btn btn-maly" data-otworz="${esc(b.sciezka)}">Otwórz</button>
-          <button type="button" class="btn btn-maly btn-usun" data-usun-bilet="${b.id}" data-sciezka="${esc(b.sciezka)}">Usuń</button>
+          <button type="button" class="btn btn-maly" data-otworz="${b.id}">Otwórz</button>
+          <button type="button" class="btn btn-maly btn-usun" data-usun-bilet="${b.id}">Usuń</button>
         </span>
       </li>`).join('') || '<li><small>Brak biletów</small></li>';
 
     // Prywatny plik otwieramy przez link ważny 60 sekund
     ul.querySelectorAll('[data-otworz]').forEach(b => b.onclick = async () => {
       const okno = window.open('', '_blank');
-      const { data, error } = await Koncertownik.db.storage.from('bilety').createSignedUrl(b.dataset.otworz, 60);
+      const bilet = data.find(x => x.id === b.dataset.otworz);
+      const { data: link, error } = await Koncertownik.db.storage.from(bilet.schowek).createSignedUrl(bilet.adres, 60);
       if (Koncertownik.admin.blad(error, 'Nie udało się otworzyć')) { okno?.close(); return; }
-      okno.location = data.signedUrl;
+      okno.location = link.signedUrl;
     });
     ul.querySelectorAll('[data-usun-bilet]').forEach(b => b.onclick = async () => {
       if (!confirm('Usunąć ten bilet?')) return;
-      await Koncertownik.db.storage.from('bilety').remove([b.dataset.sciezka]);
-      await Koncertownik.db.from('bilety').delete().eq('id', b.dataset.usunBilet);
+      await Koncertownik.media.usunPliki(data.filter(x => x.id === b.dataset.usunBilet));
+      await Koncertownik.db.from('media').delete().eq('id', b.dataset.usunBilet);
       this.pokazBilety(ul, koncertId);
     });
   }

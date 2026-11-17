@@ -1,0 +1,129 @@
+/* =====================================================
+   BLOKI – wygląd edytora (tylko po zalogowaniu)
+   ===================================================== */
+
+/* Ramka bloku w trybie edycji */
+.tryb-edycji .blok { outline: 1px dashed color-mix(in srgb, var(--akcent-jasny) 45%, transparent); outline-offset: 3px; overflow: visible; }
+.tryb-edycji .blok:hover { outline-color: var(--akcent-jasny); }
+.tryb-edycji .blok.wybrany { outline: 2px solid var(--akcent2); }
+.tryb-edycji .blok .blok-tlo { overflow: hidden; border-radius: inherit; inset: 0; }
+
+/* Pasek narzędzi bloku – pojawia się po najechaniu */
+.blok-narzedzia {
+  position: absolute; top: -14px; left: 10px; z-index: 20;
+  display: flex; align-items: center; gap: 2px;
+  padding: 3px 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--karta) 92%, black);
+  border: 1px solid var(--ramka-a);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  opacity: 0; transition: opacity 0.15s;
+  font-size: 0.75rem;
+}
+.blok:hover > .blok-narzedzia, .blok.wybrany > .blok-narzedzia, .blok:focus-within > .blok-narzedzia { opacity: 1; }
+@media (hover: none) { .blok-narzedzia { opacity: 1; } }
+.blok-narzedzia button {
+  display: inline-flex; align-items: center; gap: 1px;
+  border: none; background: none; color: var(--tekst);
+  padding: 5px 7px; border-radius: 999px; cursor: pointer; font-size: 0.95rem;
+}
+.blok-narzedzia button:hover { background: var(--akcent); }
+.blok-narzedzia small { font-size: 0.7rem; }
+.blok-uchwyt { cursor: grab !important; touch-action: none; }
+.blok-nazwa { padding: 0 6px; color: var(--tekst-slaby); white-space: nowrap; }
+
+/* Uchwyt zmiany rozmiaru */
+.blok-rozmiar {
+  position: absolute; right: -10px; bottom: -10px; z-index: 20;
+  width: 26px; height: 26px; display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--akcent); color: #fff; font-size: 0.85rem;
+  cursor: nwse-resize; touch-action: none;
+  opacity: 0; transition: opacity 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.blok:hover > .blok-rozmiar, .blok.wybrany > .blok-rozmiar { opacity: 1; }
+@media (hover: none) { .blok-rozmiar { opacity: 1; } }
+
+/* Podczas przeciągania */
+.blok.przeciagany { opacity: 0.55; outline: 2px solid var(--akcent2) !important; }
+body.przeciaganie, body.przeciaganie * { user-select: none; cursor: grabbing !important; }
+body.przeciaganie iframe { pointer-events: none; }
+
+/* Pola, w których można pisać */
+.tryb-edycji [contenteditable="true"] { outline: none; cursor: text; border-radius: 4px; }
+.tryb-edycji [contenteditable="true"]:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--akcent-jasny) 50%, transparent); }
+.tryb-edycji [contenteditable="true"]:focus { box-shadow: 0 0 0 2px var(--akcent2); }
+.tryb-edycji figcaption[contenteditable]:empty::before,
+.tryb-edycji cite[contenteditable]:empty::before { content: 'dopisz…'; opacity: 0.5; }
+.odstep-podglad {
+  height: 100%; min-height: 30px; display: grid; place-items: center;
+  border: 1px dashed var(--ramka-a); border-radius: 8px;
+  font-size: 0.7rem; color: var(--tekst-slaby); text-transform: uppercase; letter-spacing: 2px;
+}
+
+/* Przycisk zapisu na pasku */
+.btn-zapisz { background: linear-gradient(135deg, #16a34a, #4ade80) !important; animation: swiecenie 1.6s ease-in-out infinite; }
+@keyframes swiecenie { 50% { box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.35), 0 0 18px rgba(74, 222, 128, 0.6); } }
+
+/* Pływające paski: formatowanie tekstu i element kolażu */
+.pasek-tekstu, .pasek-elementu {
+  position: fixed; z-index: 60;
+  display: flex; align-items: center; gap: 2px;
+  padding: 4px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--karta) 95%, black);
+  border: 1px solid var(--ramka-a);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.pasek-tekstu button, .pasek-elementu button, .pasek-tekstu label, .pasek-elementu label {
+  display: inline-flex; align-items: center; gap: 1px;
+  border: none; background: none; color: var(--tekst);
+  padding: 6px 8px; border-radius: 6px; cursor: pointer; font-size: 1rem; position: relative;
+}
+.pasek-tekstu button:hover, .pasek-elementu button:hover, .pasek-tekstu label:hover, .pasek-elementu label:hover { background: var(--akcent); }
+.pasek-tekstu input[type=color], .pasek-elementu input[type=color] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.pasek-elementu select {
+  background: rgba(0, 0, 0, 0.35); color: var(--tekst);
+  border: 1px solid var(--ramka-a); border-radius: 6px; padding: 5px; font-size: 0.75rem; max-width: 120px;
+}
+
+/* Kolaż w edycji */
+.tryb-edycji .kolaz { outline: 1px dashed var(--ramka-a); }
+.tryb-edycji .kolaz-el { cursor: move; touch-action: none; }
+.kolaz-el.wybrany-el { outline: 2px solid var(--akcent2); outline-offset: 4px; }
+.uchwyt-el {
+  position: absolute; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--akcent2); border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); touch-action: none;
+}
+.uchwyt-rozmiar-el { right: -12px; bottom: -12px; cursor: nwse-resize; }
+.uchwyt-obrot-el { left: 50%; top: -34px; transform: translateX(-50%); cursor: grab; }
+.uchwyt-obrot-el::after { content: ''; position: absolute; left: 50%; top: 16px; width: 2px; height: 14px; background: var(--akcent2); }
+.kolaz-tekst[contenteditable="true"] { outline: 2px dashed var(--akcent2); cursor: text; }
+
+/* Okno „Dodaj blok” */
+.wybor-bloku button { border: none; background: none; padding: 0; }
+.wybor-bloku button span { height: 100%; }
+.wybor-bloku button:hover span { background: var(--akcent); border-color: var(--akcent-jasny); }
+
+/* Szuflada – kolory z opcją „brak” i miniatury galerii */
+.pole-kolor-opc { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--tekst-slaby); }
+.pole-kolor-opc input[type=color] { width: 44px; height: 30px; border: none; background: none; cursor: pointer; margin-left: auto; }
+.pole-obraz input[type=text] {
+  width: 100%; padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.35); border: 1px solid var(--ramka-a);
+  color: var(--tekst); border-radius: 8px; font: 0.8rem var(--font);
+}
+.miniatury { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; }
+.miniatura { position: relative; }
+.miniatura img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; }
+.miniatura button {
+  position: absolute; top: 2px; right: 2px; width: 22px; height: 22px;
+  display: grid; place-items: center; border: none; border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75); color: #fff; cursor: pointer; font-size: 0.75rem;
+}
+
+/* Animacje zatrzymują się, gdy blok edytujesz – łatwiej trafić w uchwyty */
+.tryb-edycji .blok:hover, .tryb-edycji .blok.wybrany, .tryb-edycji .blok:focus-within { animation-play-state: paused; }
+.tryb-edycji .anim-wejscie { opacity: 1; transform: none; }

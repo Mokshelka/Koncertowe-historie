@@ -30,7 +30,7 @@ section h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--akcent2); }
 /* Formularze */
 .formularz { display: flex; flex-direction: column; gap: 10px; }
 .formularz label { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; color: var(--tekst-slaby); flex: 1; }
-.formularz input:not([type=color]):not([type=file]),
+.formularz input:not([type=color]):not([type=file]):not([type=checkbox]):not([type=radio]):not([type=range]),
 .formularz select,
 .formularz textarea {
   width: 100%;
@@ -129,3 +129,19 @@ section h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--akcent2); }
 .z-ikona { display: flex; align-items: center; gap: 10px; }
 .ikona-listy { font-size: 1.6rem; color: var(--akcent2); }
 .zakladki .ph { font-size: 1.05em; }
+
+/* Wybrana ikona artysty */
+.wybrana-ikona { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; }
+.podglad-ikony {
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  font-size: 2.2rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--akcent) 30%, transparent);
+  color: var(--akcent2);
+}
+.wybor-ikon { max-height: 260px; overflow-y: auto; padding-right: 4px; }
+
+/* Pola wyboru i suwaki */
+.formularz input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--akcent); flex-shrink: 0; }
+.formularz input[type=range] { width: 100%; accent-color: var(--akcent); }

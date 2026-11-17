@@ -8,8 +8,13 @@
   try {
     await Koncertownik.wczytajDane();
   } catch (blad) {
+    // Baza nie odpowiada (np. projekt w Supabase jest uśpiony).
+    // Pokazujemy komunikat, ale reszta strony (globus!) i tak startuje.
     Koncertownik.bladLadowania(blad);
-    return;
+    Koncertownik.dane = {
+      ustawienia: { tytul: 'KONCERTOWNIK', opis: '', stopka: '', motyw: {} },
+      miasta: [], artysci: [], koncerty: []
+    };
   }
 
   const u = Koncertownik.dane.ustawienia;

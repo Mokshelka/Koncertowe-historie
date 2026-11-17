@@ -93,5 +93,6 @@ Koncertownik.admin.edytorMotywu = {
     pole.value = url;
     img.src = url;
     img.hidden = !url;
+    pole.dispatchEvent(new Event('input', { bubbles: true }));   // podgląd na żywo
   }
 };

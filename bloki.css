@@ -1,0 +1,227 @@
+/* =====================================================
+   BLOKI – układ i wygląd klocków na stronie artysty
+   ===================================================== */
+
+/* --- Siatka: 12 kolumn na komputerze, wszystko w jednej kolumnie na telefonie --- */
+.bloki {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.blok {
+  grid-column: span var(--szer, 12);
+  min-height: var(--wys, auto);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  container-type: inline-size;
+  padding: var(--b-pad, 18px);
+  border-radius: var(--b-zaokr, var(--promien));
+  border: 1px solid var(--ramka-a);
+  background: var(--b-tlo, var(--karta-a));
+  color: var(--b-kolor, var(--tekst));
+  font-family: var(--b-font, inherit);
+  font-size: calc(1rem * var(--b-rozmiar, 1));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 700px) {
+  .blok { grid-column: span 12; }
+}
+
+/* Blok bez karty – sama treść na tle strony */
+.blok.bez-karty { background: var(--b-tlo, transparent); border-color: transparent; box-shadow: none; }
+
+/* Zdjęcie w tle bloku (z rozmyciem i przyciemnieniem) */
+.blok-tlo {
+  position: absolute;
+  inset: calc(var(--b-rozmycie, 0px) * -2);
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  filter: blur(var(--b-rozmycie, 0px));
+}
+.blok-tlo::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, var(--b-przyc, 0)); }
+
+.blok-tresc { position: relative; height: 100%; }
+
+/* --- Wyrównanie --- */
+.wyr-lewo   { text-align: left; }
+.wyr-srodek { text-align: center; }
+.wyr-prawo  { text-align: right; }
+
+/* --- Tekstury (warstwa nad tłem, pod treścią) --- */
+.blok[class*="tekstura-"]::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+}
+.tekstura-ziarno::after {
+  opacity: 0.35; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.tekstura-papier::after {
+  opacity: 0.25; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 0.9  0 0 0 0 0.7  0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+}
+.tekstura-kratka::after {
+  opacity: 0.18;
+  background-image: linear-gradient(var(--tekst) 1px, transparent 1px), linear-gradient(90deg, var(--tekst) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.tekstura-linie::after {
+  opacity: 0.18;
+  background-image: repeating-linear-gradient(transparent 0 27px, var(--akcent-jasny) 27px 28px);
+}
+.tekstura-kropki::after {
+  opacity: 0.25;
+  background-image: radial-gradient(var(--tekst) 1.2px, transparent 1.4px);
+  background-size: 16px 16px;
+}
+.tekstura-brokat::after {
+  opacity: 0.6; mix-blend-mode: screen;
+  background-image:
+    radial-gradient(circle, #fff 0.8px, transparent 1.4px),
+    radial-gradient(circle, var(--akcent2) 1px, transparent 1.6px),
+    radial-gradient(circle, var(--akcent-jasny) 0.8px, transparent 1.4px);
+  background-size: 37px 41px, 53px 47px, 29px 31px;
+  background-position: 0 0, 13px 21px, 7px 3px;
+  animation: brokat 3s steps(6) infinite;
+}
+@keyframes brokat { 50% { opacity: 0.25; } }
+
+/* --- Ramki --- */
+.ramka-brak { border-color: transparent; box-shadow: none; }
+.ramka-gruba { border: 3px solid var(--akcent); }
+.ramka-przerywana { border: 2px dashed var(--akcent-jasny); }
+.ramka-neon {
+  border: 2px solid var(--akcent2);
+  box-shadow: 0 0 10px var(--akcent2), 0 0 28px color-mix(in srgb, var(--akcent) 70%, transparent), inset 0 0 12px color-mix(in srgb, var(--akcent2) 40%, transparent);
+}
+.ramka-polaroid {
+  background: #f6f2e9; color: #222; border: none;
+  padding: 12px 12px 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+}
+.ramka-tasma { overflow: visible; }
+.ramka-tasma::before {
+  content: ''; position: absolute; z-index: 3;
+  top: -10px; left: 50%; width: 110px; height: 26px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: color-mix(in srgb, var(--akcent-jasny) 55%, transparent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.ramka-tasma .blok-tlo { inset: 0; border-radius: inherit; }
+
+/* --- Efekty tekstu --- */
+.efekt-poswiata .blok-tresc { text-shadow: 0 0 10px var(--akcent2), 0 0 26px var(--akcent); }
+.efekt-cien .blok-tresc { text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.65); }
+.efekt-neon .blok-tresc {
+  color: #fff;
+  text-shadow: 0 0 4px #fff, 0 0 10px var(--akcent2), 0 0 22px var(--akcent2), 0 0 40px var(--akcent);
+}
+.efekt-obrys .tekst-glowny { color: transparent; -webkit-text-stroke: 1.5px var(--b-kolor, var(--akcent2)); }
+.efekt-gradient .tekst-glowny {
+  background: linear-gradient(120deg, var(--akcent-jasny), var(--akcent2), var(--akcent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* --- Animacje --- */
+.anim-unoszenie { animation: unoszenie 6s ease-in-out infinite; }
+.anim-puls      { animation: puls 2.4s ease-in-out infinite; }
+.anim-kolysanie { animation: kolysanie 4s ease-in-out infinite; }
+.anim-wejscie   { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+.anim-wejscie.widoczny { opacity: 1; transform: none; }
+@keyframes unoszenie { 50% { transform: translateY(-8px); } }
+@keyframes puls      { 50% { transform: scale(1.03); } }
+@keyframes kolysanie { 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .blok, .blok::after { animation: none !important; }
+  .anim-wejscie { opacity: 1; transform: none; }
+}
+
+/* =====================================================
+   Rodzaje bloków
+   ===================================================== */
+
+.blok h2.tekst-glowny {
+  font-family: var(--b-font, var(--font-naglowkow));
+  font-size: clamp(1.6rem, 7cqw, 4.2rem);
+  font-size: calc(clamp(1.6rem, 7cqw, 4.2rem) * var(--b-rozmiar, 1));
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.tekst-blok { line-height: 1.65; }
+.tekst-blok p, .tekst-blok div { margin-bottom: 0.6em; }
+.tekst-blok h3 { font-family: var(--b-font, var(--font-naglowkow)); font-size: 1.3em; margin: 0.4em 0; color: var(--akcent2); }
+.tekst-blok ul, .tekst-blok ol { padding-left: 1.4em; margin-bottom: 0.6em; }
+.tekst-blok a { color: var(--akcent2); }
+
+.zdjecie-blok { margin: 0; height: 100%; display: flex; flex-direction: column; }
+.zdjecie-blok img {
+  width: 100%; flex: 1; min-height: 160px;
+  border-radius: calc(var(--b-zaokr, var(--promien)) * 0.6);
+  display: block; cursor: zoom-in;
+}
+.blok-zdjecie:not([style*="--wys"]) .zdjecie-blok img { aspect-ratio: 4 / 3; }
+.zdjecie-blok figcaption { font-size: 0.85em; color: var(--b-kolor, var(--tekst-slaby)); margin-top: 8px; }
+.ramka-polaroid .zdjecie-blok figcaption { color: #333; font-family: 'Caveat', 'Comic Sans MS', cursive; font-size: 1.15em; }
+
+.galeria-blok { display: grid; grid-template-columns: repeat(var(--kolumny, 3), 1fr); gap: 8px; }
+.galeria-blok img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; cursor: zoom-in; }
+@media (max-width: 480px) { .galeria-blok { grid-template-columns: repeat(2, 1fr); } }
+
+.cytat-blok { margin: 0; }
+.cytat-blok > .ph-duotone { font-size: 2.2rem; color: var(--akcent2); }
+.cytat-blok p {
+  font-family: var(--b-font, var(--font-naglowkow));
+  font-size: calc(clamp(1.2rem, 4.5cqw, 2rem) * var(--b-rozmiar, 1));
+  font-style: italic; line-height: 1.35; margin: 6px 0;
+}
+.cytat-blok cite { display: block; font-size: 0.9em; color: var(--tekst-slaby); font-style: normal; }
+.cytat-blok cite:not(:empty)::before { content: '— '; }
+
+.wideo-blok { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; display: block; background: #000; }
+.spotify-blok { width: 100%; border: 0; border-radius: 12px; display: block; }
+
+.naklejka-blok { line-height: 1; color: var(--b-kolor, var(--akcent2)); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--akcent) 60%, transparent)); }
+
+.blok-setlista h3 { font-size: 0.95rem; margin-bottom: 8px; color: var(--akcent2); }
+
+.blok-koncerty { padding: 0; }
+.blok-koncerty #koncerty > section:last-child { margin-bottom: 0; }
+
+/* --- Kolaż --- */
+.blok-kolaz { padding: var(--b-pad, 0px); }
+.kolaz { position: relative; width: 100%; container-type: inline-size; }
+.kolaz-el { position: absolute; transform-origin: center; }
+.kolaz-zdjecie img { width: 100%; display: block; border-radius: 4px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45); }
+.kolaz-tekst {
+  display: block;
+  font-family: var(--el-font, var(--font-naglowkow));
+  font-size: calc(var(--el-rozmiar, 5) * 1cqw);
+  color: var(--el-kolor, var(--tekst));
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  white-space: pre-wrap;
+}
+.kolaz-ikona { color: var(--el-kolor, var(--akcent2)); line-height: 1; text-align: center; }
+.kolaz-ikona .ph-duotone { font-size: calc(var(--el-rozmiar, 10) * 1cqw); filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5)); }
+/* Ramki elementów kolażu */
+.el-polaroid { background: #f6f2e9; padding: 4% 4% 14%; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); }
+.el-polaroid img { box-shadow: none; border-radius: 0; }
+.el-tasma::before {
+  content: ''; position: absolute; z-index: 2; top: -6%; left: 30%; width: 40%; height: 12%; min-height: 12px;
+  transform: rotate(-4deg);
+  background: color-mix(in srgb, var(--akcent-jasny) 55%, transparent);
+}
+.el-okragle img { border-radius: 50%; aspect-ratio: 1; object-fit: cover; }
+
+/* Pusty blok (tylko w trybie edycji) */
+.blok-pusty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  min-height: 120px; padding: 16px;
+  border: 2px dashed var(--ramka-a); border-radius: 10px;
+  color: var(--tekst-slaby); font-size: 0.85rem; text-align: center;
+}
+.blok-pusty .ph-duotone { font-size: 2rem; color: var(--akcent2); }
+.kolaz-pusty { position: absolute; inset: 10px; min-height: 0; }
